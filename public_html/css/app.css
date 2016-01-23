@@ -1,18 +1,46 @@
-html,
+/******************
+     Web Fonts
+************************/
+
+@font-face {
+    font-family: 'clear_sansregular';
+    src: url('../fonts/ClearSans-Regular-webfont.eot');
+    src: url('../fonts/ClearSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/ClearSans-Regular-webfont.woff') format('woff'),
+        url('../fonts/ClearSans-Regular-webfont.ttf') format('truetype'),
+        url('../fonts/ClearSans-Regular-webfont.svg#clear_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    height: 100%;
+    font-family: 'clear_sansregular', sans-serif;
 }
 
 
+/******************
+     Header
+************************/
 
 header {
     height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .banner {
     max-height: 100%;
     margin-top: 30px;
 }
+
+/******************
+     Section
+************************/
+
+h4 {
+    text-align: center
+}
+
+
