@@ -10,44 +10,71 @@ var gulp = require('gulp'),
         imageResize = require('gulp-image-resize'),
         imagemin = require('gulp-imagemin'),
         changed = require('gulp-changed'),
-        pngquant = require('imagemin-pngquant');
-;
+        pngquant = require('imagemin-pngquant'),
+        chmod = require('gulp-chmod');
+
 
 var resizeImages = function (options) {
-    gulp.src('img/full_size/**.{jpg,JPG}')
-        .pipe(changed('img/gallery'))
-        .pipe(imageResize({width: options.width}))
-        .pipe(imagemin({
+    gulp.src('img/gallery/full_size/**.{jpg,JPG}')
+            .pipe(imageResize({width: options.width}))
+            .pipe(imagemin({
                 progressive: true,
                 interlaced: true,
                 svgoPlugins: [{removeViewBox: false}],
                 use: [pngquant()]
             }))
-        .pipe(rename(function (path) {
-                path.basename += options.fileSuffix;
+            .pipe(rename(function (path) {
+                path.dirname += options.folder;
                 path.extname = ".jpg";
                 return path;
             }))
-        .pipe(gulp.dest('img/gallery'));
+            .pipe(gulp.dest('img/gallery'));
 };
 
-gulp.task('resize-images', function () {
+gulp.task("jpg", function () {
+    return gulp.src('img/new/**.{jpg,JPG}')
+            .pipe(chmod(666))
+            .pipe(rename(function (path) {
+                path.dirname += "/full_size";
+                path.extname = ".jpg";
+                return path;
+            }))
+            .pipe(gulp.dest('img/gallery'));
+});
+
+
+gulp.task('resize', ["jpg"], function () {
+    
+    
     var small = {
         width: 640,
-        fileSuffix: '_small'
+        folder: '/small'
     };
     var medium = {
         width: 820,
-        fileSuffix: '_mid'
+        folder: '/mid'
     };
     var zoom = {
         width: 1290,
-        fileSuffix: '_zoom'
+        folder: '/zoom'
     };
+
     resizeImages(small);
     resizeImages(medium);
     resizeImages(zoom);
 });
+
+gulp.task('images', ['resize'], function (){
+    del('img/new/**/*');
+});
+
+
+gulp.task("json", function () {
+    gulp.src('img/gallery/**')
+            .pipe(require('gulp-filelist')('filelist.json'))
+            .pipe(gulp.dest('img'));
+});
+
 
 
 

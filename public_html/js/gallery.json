@@ -1,3 +1,38 @@
 {
-    "name": "progr"
+	"gallery": [{
+		"name": "64640005.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Flowers and peace sign"
+	}, {
+		"name": "64640009.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Dreamy park, in Amstelpark"
+	}, {
+		"name": "64640010.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Leaves"
+	}, {
+		"name": "64640011.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Chairs, in Amstelpark"
+	}, {
+		"name": "64640031.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Side portrait"
+	}, {
+		"name": "64640032.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Amsterdamse bos park, rowing track"
+	}, {
+		"name": "64640035.jpg",
+		"date": "08-2015",
+		"location": "Amsterdam",
+		"alt": "Chopper bike in Amsterdamse bos park"
+	}]
 }
