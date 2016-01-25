@@ -1,38 +1,64 @@
 {
-	"gallery": [{
-		"name": "64640005.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Flowers and peace sign"
-	}, {
-		"name": "64640009.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Dreamy park, in Amstelpark"
-	}, {
-		"name": "64640010.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Leaves"
-	}, {
-		"name": "64640011.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Chairs, in Amstelpark"
-	}, {
-		"name": "64640031.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Side portrait"
-	}, {
-		"name": "64640032.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Amsterdamse bos park, rowing track"
-	}, {
-		"name": "64640035.jpg",
-		"date": "08-2015",
-		"location": "Amsterdam",
-		"alt": "Chopper bike in Amsterdamse bos park"
-	}]
+    "gallery": [
+        {
+            "name": "0001.jpg",
+            "date": "08-2015",
+            "location": "Amsterdam",
+            "alt": "Flowers and peace sign"
+        },
+        {
+            "name": "0002.jpg",
+            "date": "08-2015",
+            "location": "Amsterdam",
+            "alt": "Dreamy park, in Amstelpark"
+        },
+        {
+            "name": "0003.jpg",
+            "date": "08-2015",
+            "location": "Amsterdam",
+            "alt": "Chairs, in Amstelpark"
+        },
+        {
+            "name": "0004.jpg",
+            "date": "08-2015",
+            "location": "Amsterdam",
+            "alt": "Side portrait"
+        },
+        {
+            "name": "0005.jpg",
+            "date": "08-2015",
+            "location": "Amsterdam",
+            "alt": "Amsterdamse bos park, rowing track"
+        },
+        {
+            "name": "0006.jpg",
+            "date": "08-2015",
+            "location": "Amsterdam",
+            "alt": "Chopper bike in Amsterdamse Bos Park"
+        },
+        {
+            "name": "0007.jpg",
+            "date": "09-2015",
+            "location": "Amsterdam",
+            "alt": "Rower in Amsterdamse Bos Park"
+        },
+        {
+            "name": "0008.jpg",
+            "date": "09-2015",
+            "location": "Amsterdam",
+            "alt": "Central Station in Amsterdam"
+        },
+        {
+            "name": "0009.jpg",
+            "date": "09-2015",
+            "location": "Amsterdam",
+            "alt": "Hanging shirt"
+        },
+        {
+            "name": "0010.jpg",
+            "date": "09-2015",
+            "location": "Amsterdam",
+            "alt": "Submarines"
+        }
+    ]
 }

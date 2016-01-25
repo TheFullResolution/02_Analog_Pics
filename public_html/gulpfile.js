@@ -1,3 +1,5 @@
+/* global UNKNOWN */
+
 "use strict";
 var gulp = require('gulp'),
         concat = require('gulp-concat'),
@@ -11,7 +13,8 @@ var gulp = require('gulp'),
         imagemin = require('gulp-imagemin'),
         changed = require('gulp-changed'),
         pngquant = require('imagemin-pngquant'),
-        chmod = require('gulp-chmod');
+        chmod = require('gulp-chmod'),
+        fs = require('fs');
 
 
 var resizeImages = function (options) {
@@ -32,9 +35,35 @@ var resizeImages = function (options) {
 };
 
 gulp.task("jpg", function () {
+
+    var files = fs.readdirSync('img/gallery/full_size/'), index = 1, prename = '';
+
+    // here we will find maximum number of index
+    // keep in mind that this is very inefficient.
+    files.forEach(function (currentFile) {
+        var currentIndex = (/^([0-9]+)\.jpg$/i.exec(currentFile) || [, false])[1];
+        if (currentIndex && parseInt(currentIndex) >= index) {
+            index = ++currentIndex;
+        }
+    });
+
+    var name = function() {
+                    if (index < 10) {
+                        prename = '000';
+                    } else if (index < 100 && index >= 10) {
+                        prename = '00';
+                    } else if (index >= 100) {
+                        prename = '0';
+                    }
+                    
+                    
+                    return prename + index++;
+                };
+
     return gulp.src('img/new/**.{jpg,JPG}')
             .pipe(chmod(666))
             .pipe(rename(function (path) {
+                path.basename = name();
                 path.dirname += "/full_size";
                 path.extname = ".jpg";
                 return path;
@@ -44,8 +73,8 @@ gulp.task("jpg", function () {
 
 
 gulp.task('resize', ["jpg"], function () {
-    
-    
+
+
     var small = {
         width: 640,
         folder: '/small'
@@ -64,7 +93,7 @@ gulp.task('resize', ["jpg"], function () {
     resizeImages(zoom);
 });
 
-gulp.task('images', ['resize'], function (){
+gulp.task('images', ['resize'], function () {
     del('img/new/**/*');
 });
 
