@@ -38,6 +38,26 @@ header {
     margin-top: 30px;
 }
 
+.sort {
+    text-align: center;
+}
+
+.sort img {
+    width: 25px;
+    padding: 5px;
+    margin-left: 10px;
+    vertical-align: middle;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.sort img:hover {
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
 /******************
      Section
 ************************/
@@ -55,6 +75,8 @@ h4 {
     max-width: 50%;
     flex: 1 50%;
     box-sizing: border-box;    
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
 }
 
 .img_div {

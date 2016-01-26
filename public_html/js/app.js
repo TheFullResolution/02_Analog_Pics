@@ -3,9 +3,6 @@
 var url = "js/lazysizes.min.js";
 
 var allPics = Vue.extend({
-    el: function () {
-        return "#gallery";
-    },
     data: function () {
         return {
             pics: {},
@@ -15,8 +12,20 @@ var allPics = Vue.extend({
                 small: "img/gallery/small/",
                 zoom: "img/gallery/zoom/"
             },
-            jsonloaded: false
+            jsonloaded: false,
+            sorted: false
         };
+    },
+    computed: {
+        sortStatus: function () {
+            var self = this;
+            if (!self.sorted) {
+                return "Sort: oldest to newest";
+            } else {
+                return "Sort: newest to oldest";
+            }
+        }
+
     },
     compiled: function () {
         this.fetchData();
@@ -41,10 +50,20 @@ var allPics = Vue.extend({
             }).done(function () {
 
             });
+        },
+        sort: function () {
+            this.pics.gallery.reverse();
+            this.sorted = !this.sorted;
+            
+            $('.img_div, #sort_icon').css({
+                'opacity': 0
+            }).animate({
+                opacity: 1
+            }, 1000);
+            
         }
     }
 });
-
 
 
 

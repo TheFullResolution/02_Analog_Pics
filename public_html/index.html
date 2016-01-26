@@ -12,24 +12,35 @@
 
     <body>
         <header>
- 
+
             <img class="lazyload banner pics"
-                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                data-src="img/Banner.gif" 
-                alt="banner" />
- 
+                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                 data-src="img/Banner.gif" 
+                 alt="banner" />
+
         </header>
 
         <section>
             <h4>No filters, no Photoshop - just scanned analog pics, made with Zenit 12xp</h4>
-            <div id="gallery" class="gallery">
-                <div v-for="pic in pics.gallery" class="gallery_item" v-if="jsonloaded">
+            <div class="sort">
+                <p>
+                    {{sortStatus}}
+                    <a v-on:click="sort" id="sort_icon">
+                        <img src="img/sort.svg" alt="sort icon" />
+                    </a> 
+                </p>
+            </div>
+            <div id="gallery" class="gallery" >
+                <div v-for="pic in pics.gallery" class="gallery_item"
+                     transition="fade"
+                     v-if="jsonloaded">
                     <div class="img_div">
                         <img class="lazyload pics"
-                             data-expand="-110"
+                             data-expand="-100"
                              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                              data-src="{{folders.mid + pic.name}}" 
-                             alt="{{pic.alt}}" >
+                             alt="{{pic.alt}}" 
+                             >
                     </div>
                 </div>
             </div>
