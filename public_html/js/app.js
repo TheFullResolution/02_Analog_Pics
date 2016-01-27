@@ -20,9 +20,9 @@ var allPics = Vue.extend({
         sortStatus: function () {
             var self = this;
             if (!self.sorted) {
-                return "Sort: oldest to newest";
+                return "Sorted oldest to newest";
             } else {
-                return "Sort: newest to oldest";
+                return "Sorted newest to oldest";
             }
         }
 
@@ -54,13 +54,23 @@ var allPics = Vue.extend({
         sort: function () {
             this.pics.gallery.reverse();
             this.sorted = !this.sorted;
-            
-            $('.img_div, #sort_icon').css({
-                'opacity': 0
-            }).animate({
-                opacity: 1
-            }, 1000);
-            
+            $('#sort_text').addClass('text_showed');
+            $('#sort_arrows').addClass('moved');
+            setTimeout(function() {
+                 $('#sort_text').removeClass('text_showed');
+                 $('#sort_arrows').removeClass('moved');
+            },500);
+
+            $('.img_div').each(function () {
+                var self = this;
+                $(self).css({'opacity': 0});
+                setTimeout(function () {
+                    $(self).animate({
+                        opacity: 1
+                    }, 500);
+                }, (Math.random()*1000));
+
+            });
         }
     }
 });

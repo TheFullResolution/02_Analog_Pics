@@ -15,10 +15,7 @@
 
 body {
     font-family: 'clear_sansregular', sans-serif;
-    max-width: 960px;
-    margin: 0 auto;
 }
-
 
 /******************
      Header
@@ -39,13 +36,16 @@ header {
 }
 
 .sort {
+    width: 100%;
+    margin-bottom: 20px;
     text-align: center;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(226, 227, 235, 0.8);
+    border-top: 2px solid rgba(226, 227, 235, 0.8);
 }
 
-.sort img {
+.move {
     width: 25px;
-    padding: 5px;
-    margin-left: 10px;
     vertical-align: middle;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
@@ -53,10 +53,30 @@ header {
     transition: all 0.5s ease-in-out;
 }
 
-.sort img:hover {
-    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-    transform: rotate(180deg);
+.text_show {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
+
+.text_showed {
+    transform:translate(0,-100px);
+    opacity: 0;
+}
+
+.moved {
+    -webkit-transform: rotate(220deg); /* Chrome, Safari, Opera */
+    transform: rotate(220deg);
+}
+
+.sort_link {
+    padding: 5px;
+    margin-left: 10px;
+    height: 50px;
+    width: 20px;
+}
+
 
 /******************
      Section
@@ -67,6 +87,8 @@ h4 {
 }
 
 .gallery {
+    max-width: 960px;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -81,6 +103,8 @@ h4 {
 
 .img_div {
     margin: 5px 5px;
+    max-height: 280px;
+    overflow: hidden;
 }
 
 

@@ -19,6 +19,7 @@ var gulp = require('gulp'),
 
 var resizeImages = function (options) {
     gulp.src('img/gallery/full_size/**.{jpg,JPG}')
+            .pipe(changed('img/gallery/' + options.folder))
             .pipe(imageResize({width: options.width}))
             .pipe(imagemin({
                 progressive: true,
