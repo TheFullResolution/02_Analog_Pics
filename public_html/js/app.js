@@ -127,6 +127,9 @@ var sorting = Vue.extend({
 
 var zoom_pics = Vue.extend({
     template: "#popup",
+    ready: function () {
+        this.swipe();
+    },
     computed: {
         gallery: function () {
             return this.$parent.gallery;
@@ -141,11 +144,19 @@ var zoom_pics = Vue.extend({
         currentPic: function () {
             var self = this;
             if (self.gallery) {
-                var pic = this.$parent.folders.zoom +
-                        self.gallery[self.index].name;
+                var pic = self.gallery[self.index];
                 return pic;
             } else {
-                return 'img/Banner.gif';
+                return '';
+            }
+        },
+        currentPicSrc: function () {
+            var self = this;
+            if (self.gallery) {
+                var pic = self.gallery[self.index];
+                return this.$parent.folders.zoom + pic.name;
+            } else {
+                return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             }
         },
         sortLink: function () {
@@ -177,19 +188,47 @@ var zoom_pics = Vue.extend({
                 return index - 1;
             }
         },
-        height: function () {
-            var element = document.querySelector('.img_link');
-            if ((element.offsetHeight < element.scrollHeight) || (element.offsetWidth < element.scrollWidth)) {
-                // your element have overflow
-                console.log('working');
+        imgClass: function () {
+            if (this.currentPic.ratio === "portrait") {
+                return 'img_link_port';
+            } else {
+                return 'img_link_land';
             }
-            else {
-                //your element don't have overflow
-                console.log('working hard');
+        },
+        popClass: function () {
+            if (this.currentPic.ratio === "portrait") {
+                return 'popup-container-h';
+            } else {
+                return '';
             }
         }
-    }
 
+
+
+    },
+    methods: {
+        imgChange: function () {
+            $('.img_link_img').css({'opacity': 0});
+                    $('.img_link_img').animate({
+                        opacity: 1
+                    }, 500);   
+        },
+        swipe: function () {
+            var self = this;
+            var myElement = document.getElementById('swipe_div');
+            var mc = new Hammer(myElement);
+            mc.on('swipeleft', function () {
+                var path = {name: self.zoomLink, params: {picId: self.nextpic}};
+                router.go(path);
+                self.imgChange();
+            });
+            mc.on('swiperight', function () {
+                var path = {name: self.zoomLink, params: {picId: self.prevpic}};
+                router.go(path);
+                self.imgChange();
+            });
+        }
+    }
 });
 
 
