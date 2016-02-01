@@ -208,10 +208,8 @@ var zoom_pics = Vue.extend({
     },
     methods: {
         imgChange: function () {
-            $('.img_link_img').css({'opacity': 0});
-                    $('.img_link_img').animate({
-                        opacity: 1
-                    }, 500);   
+            $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
+
         },
         swipe: function () {
             var self = this;

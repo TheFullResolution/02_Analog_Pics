@@ -68,27 +68,30 @@
                         </a> 
 
                         <a v-link="{ path: sortLink }" class="img_link"> 
-                            <img class="img_link_img"
+
+                            <img class="lazyload img_link_img"
                                  v-bind:class="imgClass"
-                                 v-bind:src="currentPicSrc" 
+                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                 data-src="{{currentPicSrc}}" 
                                  alt="{{currentPic.alt}}" 
                                  >
+
                         </a>
                         <a  v-link="{ name: zoomLink, params: { picId: nextpic}}" 
                             v-on:click="imgChange" class="arrows">
                             <img src="img/right.svg" alt="left arrow" >
                         </a>
-                        </div>
-                        <div class="popup-details">
-                            <p>Date: {{currentPic.date}}</p>
-                            <p>Location: {{currentPic.location}}</p>
-                            <p>"{{currentPic.alt}}"</p>
-                        </div>
+                    </div>
+                    <div class="popup-details">
+                        <p>Date: {{currentPic.date}}</p>
+                        <p>Location: {{currentPic.location}}</p>
+                        <p>"{{currentPic.alt}}"</p>
                     </div>
                 </div>
-
             </div>
-       
+
+        </div>
+
 
     </template>
     <script src="js/hammer.min.js" type="text/javascript"></script>
