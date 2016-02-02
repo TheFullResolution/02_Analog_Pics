@@ -12,66 +12,16 @@ var allPics = Vue.extend({
                 small: "img/gallery/small/",
                 zoom: "img/gallery/zoom/"
             },
-            jsonloaded: false,
             piczoom: false
         };
     },
     computed: {
-        lenghtPics: function () {
-            if (this.pics.gallery) {
-                counter = 0;
-
-                return this.pics.gallery.length;
-            } else {
-                return 0;
-            }
-        },
-        sorted: function () {
-            var path = this.$route.path.split('/');
-            if (path[1] === 'sortedbyold') {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        sortStatus: function () {
-            var self = this;
-            if (self.sorted) {
-                return "Sorted oldest to newest";
-            } else {
-                return "Sorted newest to oldest";
-            }
-        },
-        zoomLink: function () {
-            var self = this;
-            if (!self.sorted) {
-                return "sortedbynew";
-            } else {
-                return "sortedbyold";
-            }
-        },
-        sortLink: function () {
-            var self = this;
-            if (self.sorted) {
-                return "/sortedbynew/gallery";
-            } else {
-                return "/sortedbyold/gallery";
-            }
-        },
-        gallery: function () {
-            var self = this;
-            if (self.pics.gallery) {
-                if (this.sorted) {
-                    var pics_notsorted = self.pics.gallery;
-                    return pics_notsorted;
-                } else {
-                    var pics = self.pics.gallery.slice();
-                    pics.reverse();
-                    return pics;
-                }
-            } else {
-                return '';
-            }
+        length: function () {
+            if(this.pics.gallery) {
+            return this.pics.gallery.length;
+        } else {
+            return 0;
+        }
         }
     },
     compiled: function () {
@@ -97,7 +47,42 @@ var allPics = Vue.extend({
             }).done(function () {
 
             });
+        }
+    }
+});
+
+
+var sorting = Vue.extend({
+    template: "#header",
+    data: function () {
+        return {
+            sorted: false
+        };
+    },
+    computed: {
+        gallery: function () {
+            return this.$parent.pics.gallery;
         },
+        sortStatus: function () {
+            if (this.sorted) {
+                return "Sorted oldest to newest";
+            } else {
+                return "Sorted newest to oldest";
+            }
+        },
+        sortLink: function () {
+            if (this.sorted) {
+                return "/gallery/sortedbynew";
+            } else {
+                return "/gallery/sortedbyold";
+            }
+        },
+        folders: function () {
+            return this.$parent.folders;
+        }
+
+    },
+    methods: {
         sort: function () {
             $('#sort_arrows').addClass('moved');
             $('#sort_text').addClass('text_showed');
@@ -106,33 +91,80 @@ var allPics = Vue.extend({
                 $('#sort_text').removeClass('text_showed');
                 $('#sort_arrows').removeClass('moved');
             }, 500);
+        }
+    }
 
-            $('.img_div').each(function () {
-                var self = this;
-                $(self).css({'opacity': 0});
-                setTimeout(function () {
-                    $(self).animate({
-                        opacity: 1
-                    }, 500);
-                }, (Math.random() * 1000));
+});
 
-            });
+var sortedbynew = Vue.extend({
+    template: "#gallery_template",
+    ready: function () {
+        this.$parent.sorted = false;
+    },
+    data: function () {
+        return {
+            zoomLink: "sortedbynew"
+        };
+    },
+    computed: {
+        gallery: function () {
+            var self = this;
+            var pics = self.$parent.gallery.slice();
+            pics.reverse();
+            return pics;
+        },
+        folders: function () {
+            return this.$parent.folders;
         }
     }
 });
 
-
-var sorting = Vue.extend({
+var sortedbyold = Vue.extend({
+    template: "#gallery_template",
+    ready: function () {
+        this.$parent.sorted = true;
+    },
+    data: function () {
+        return {
+            zoomLink: "sortedbyold"
+        };
+    },
+    computed: {
+        gallery: function () {
+            var self = this;
+            var pics_notsorted = self.$parent.gallery;
+            return pics_notsorted;
+        },
+        folders: function () {
+            return this.$parent.folders;
+        }
+    }
 });
 
 var zoom_pics = Vue.extend({
-    template: "#popup",
+    template: "#zoom",
     ready: function () {
         this.swipe();
     },
     computed: {
+        sorting: function () {
+            if (this.$route.name === "sortedbynew") {
+                return false;
+            } else {
+                return true;
+            }
+        },
         gallery: function () {
-            return this.$parent.gallery;
+            if (!this.sorting) {
+                var self = this;
+                var pics = self.$parent.pics.gallery.slice();
+                pics.reverse();
+                return pics;
+            } else {
+                var self = this;
+                var pics_notsorted = self.$parent.pics.gallery;
+                return pics_notsorted;
+            }
         },
         index: function () {
             if (this.$route.params.picId) {
@@ -159,20 +191,12 @@ var zoom_pics = Vue.extend({
                 return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             }
         },
-        sortLink: function () {
-            if (!this.$parent.sorted) {
-                return "/sortedbynew/gallery";
-            } else {
-                return "/sortedbyold/gallery";
-            }
-        },
         zoomLink: function () {
-            return this.$parent.zoomLink;
+            return this.$route.name;
         },
         nextpic: function () {
-            var check = this.$parent.lenghtPics;
+            var check = this.$parent.length;
             var index = parseInt(this.index);
-
             if ((index + 1) === check) {
                 return 0;
             } else {
@@ -180,7 +204,7 @@ var zoom_pics = Vue.extend({
             }
         },
         prevpic: function () {
-            var check = this.$parent.lenghtPics;
+            var check = this.$parent.length;
             var index = parseInt(this.index);
             if (index === 0) {
                 return check - 1;
@@ -202,16 +226,10 @@ var zoom_pics = Vue.extend({
                 return '';
             }
         }
-
-
-
     },
     methods: {
         imgChange: function () {
-            $('.img_link_img').css({'opacity': 0});
-                    $('.img_link_img').animate({
-                        opacity: 1
-                    }, 500);   
+
         },
         swipe: function () {
             var self = this;
@@ -235,15 +253,24 @@ var zoom_pics = Vue.extend({
 var router = new VueRouter({
 });
 
+
+router.redirect({
+    '/' : '/gallery/sortedbynew'
+});
+
 router.map({
-    '/': {
-        component: sorting
-    },
-    '/sortedbynew/gallery': {
-        component: sorting
-    },
-    '/sortedbyold/gallery': {
-        component: sorting
+    '/gallery': {
+        component: sorting,
+        subRoutes: {
+            '/sortedbynew': {
+                component: sortedbynew
+
+            },
+            '/sortedbyold': {
+                component: sortedbyold
+            }
+
+        }
     },
     '/sortedbynew/:picId': {
         name: 'sortedbynew',

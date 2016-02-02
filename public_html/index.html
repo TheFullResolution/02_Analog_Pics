@@ -11,31 +11,33 @@
     </head>
 
     <body>
+    <router-view></router-view>
 
+    <template id="header"> 
         <header>
-
             <img class="lazyload banner pics"
                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                  data-src="img/Banner.gif" 
                  alt="banner" />
-
         </header>
         <section>
-
             <div class="sort">
                 <h4>No filters, no Photoshop - just scanned analog pics, made with Zenit 12xp</h4>
-
                 <p id="sort_text" class="text_show">{{sortStatus}}</p>
                 <a v-on:click="sort" v-link="{ path: sortLink }"
                    id="sort_icon" class="sort_link">
                     <img src="img/sort.svg" alt="sort icon" id="sort_arrows" class="move"/>
                 </a> 
-
             </div>
+            
+             <router-view></router-view>
 
+        </section>
+    </template>
+    <template id="gallery_template"> 
             <div id="gallery" class="gallery" >
                 <div v-for="pic in gallery" class="gallery_item"
-                     v-if="jsonloaded">
+                     >
                     <a  v-link="{ name: zoomLink, params: { picId: $index}}">
                         <div class="img_div">
                             <img class="lazyload pics"
@@ -48,26 +50,20 @@
                     </a>    
                 </div>
             </div>
-        </section>
-
-    <router-view></router-view>
+ </template>
 
 
-
-
-    <template id="popup">
-        <div class="popup-mask" transition="popup">  
-            <div class="popup-wrapper" id="swipe_div">
+    <template id="zoom">
                 <p class="text_close">click on the image to close</p>
-                <div class="popup-container" >
+                <div class="popup-container" id="swipe_div">
                     <div class="popup-img-div"
                          v-bind:class="popClass">
-                        <a  v-link="{ name: zoomLink, params: { picId: prevpic}}" 
+                        <a v-link="{ name: zoomLink, params: { picId: prevpic}}" 
                             v-on:click="imgChange" class="arrows">
                             <img src="img/left.svg" alt="left arrow" >
                         </a> 
 
-                        <a v-link="{ path: sortLink }" class="img_link"> 
+                        <a class="img_link"> 
                             <img class="img_link_img"
                                  v-bind:class="imgClass"
                                  v-bind:src="currentPicSrc" 
@@ -78,19 +74,16 @@
                             v-on:click="imgChange" class="arrows">
                             <img src="img/right.svg" alt="left arrow" >
                         </a>
-                        </div>
-                        <div class="popup-details">
-                            <p>Date: {{currentPic.date}}</p>
-                            <p>Location: {{currentPic.location}}</p>
-                            <p>"{{currentPic.alt}}"</p>
-                        </div>
+                    </div>
+                    <div class="popup-details">
+                        <p>Date: {{currentPic.date}}</p>
+                        <p>Location: {{currentPic.location}}</p>
+                        <p>"{{currentPic.alt}}"</p>
                     </div>
                 </div>
-
-            </div>
-       
-
     </template>
+    
+    
     <script src="js/hammer.min.js" type="text/javascript"></script>
     <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
     <script src="js/vue.js" type="text/javascript"></script>
