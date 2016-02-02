@@ -106,6 +106,7 @@ h4 {
 }
 
 .gallery_item {
+    margin: 0;
     max-width: 50%;
     flex: 1 50%;
     box-sizing: border-box;    
@@ -143,96 +144,9 @@ h4 {
     opacity: 1;
 }
 
-
-/******************
-     POPup
-************************/
-
-
-.text_close {
-    position: absolute;
-    left: 10px;
-    top: 0;
-    font-size: 0.8em;
+figcaption {
+  display: none;
 }
-
-.popup-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.popup-container {
-    width: 100vmin;
-    margin: 0px auto;
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
-}
-
-.popup-container-h {
-    height: 100vmin;
-    width: auto;
-}
-
-.popup-img-div {
-    vertical-align: middle;
-    text-align: center;
-    box-sizing: border-box;  
-    padding-top: 10px;
-}
-
-.popup-details {
-    text-align: center;  
-    border-radius: 10px;
-    width: 100%;
-    background-color: rgba(224, 224, 224, .95);
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
-    margin-top: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-
-.popup-details p {
-    box-sizing: border-box;  
-    margin: 0;
-}
-
-.img_link,
-.arrows {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.arrows {
-    width: 8%;
-}
-
-.img_link {
-    cursor: -moz-zoom-out;
-    cursor: -webkit-zoom-out;
-    cursor: zoom-out;
-    width: 80%;
-}
-
-.arrows > img {
-    max-width: 100%;
-    opacity: 0.1;
-}
-
-.img_link_img {
-    display:block;
-}
-
-.img_link_land {
-    width: 100%
-}
-
-.img_link_port {
-    height: 100%;
-    margin: 0 auto;
-}
-
 /******************
      Media for page
 ************************/
