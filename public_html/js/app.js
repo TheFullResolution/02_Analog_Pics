@@ -93,14 +93,21 @@ var sortedbynew = Vue.extend({
     },
     computed: {
         gallery: function () {
-            var self = this;
-            var pics = self.$parent.gallery.slice();
+            if(this.$parent.gallery) {
+            var pics = this.$parent.gallery.slice();
             pics.reverse();
             return pics;
+        } else {
+            return '';
+        }
         },
         folders: function () {
             return this.$parent.folders;
+        },
+        length: function () {
+            return this.$parent.length;
         }
+        
     }
 });
 
@@ -116,18 +123,27 @@ var sortedbyold = Vue.extend({
     },
     computed: {
         gallery: function () {
-
-            var self = this;
-            var pics_notsorted = self.$parent.gallery;
+            if(this.$parent.gallery) {
+            var pics_notsorted = this.$parent.gallery;
             return pics_notsorted;
+        } else {
+            return '';
+        }
         },
         folders: function () {
             return this.$parent.folders;
+        },
+        length: function () {
+            return this.$parent.length;
         }
     }
 });
 
-
+var zoom = Vue.extend({
+     template: "#popup",
+     
+     
+}); 
 
 var router = new VueRouter({
 });
@@ -139,11 +155,23 @@ router.redirect({
 
 router.map({
     '/sortedbynew': {
-        component: sortedbynew
+        component: sortedbynew,
+         subRoutes: {
+             '/:picId' : {
+                 name: 'gallery',
+                 component: 'zoom'
+             }
+         }
 
     },
     '/sortedbyold': {
-        component: sortedbyold
+        component: sortedbyold,
+         subRoutes: {
+             '/:picId' : {
+                 name: 'gallery',
+                 component: 'zoom'
+             }
+         }
     }
 
 

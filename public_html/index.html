@@ -71,13 +71,14 @@
                 </div>
             </div>
         </div>
+        <router-view></router-view>
  </template> 
 
         |
         <template id="gallery_template"> 
             <div id="gallery" class="gallery" >
                 <figure v-for="pic in gallery" class="gallery_item">
-                    <a v-bind:href="folders.mid + pic.name" data-size="1290x855">
+                    <a v-bind:href="folders.mid + pic.name">
                         <div class="img_div">
                             <img class="lazyload pics"
                                  data-expand="-100"
