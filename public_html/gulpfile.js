@@ -14,6 +14,7 @@ var gulp = require('gulp'),
         changed = require('gulp-changed'),
         pngquant = require('imagemin-pngquant'),
         chmod = require('gulp-chmod'),
+        sizeOf = require('image-size'),
         fs = require('fs');
 
 

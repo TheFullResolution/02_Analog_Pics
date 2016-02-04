@@ -12,48 +12,27 @@
 
     <body>
 
-        <header>
 
+
+        <header>
             <img class="lazyload banner pics"
                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                  data-src="img/Banner.gif" 
                  alt="banner" />
-
         </header>
         <section>
-
             <div class="sort">
                 <h4>No filters, no Photoshop - just scanned analog pics, made with Zenit 12xp</h4>
-
                 <p id="sort_text" class="text_show">{{sortStatus}}</p>
                 <a v-on:click="sort" v-link="{ path: sortLink }"
                    id="sort_icon" class="sort_link">
                     <img src="img/sort.svg" alt="sort icon" id="sort_arrows" class="move"/>
                 </a> 
-
             </div>
 
-            <div id="gallery" class="gallery" >
-                <div v-for="pic in gallery" class="gallery_item"
-                     v-if="jsonloaded">
-                    <a  v-link="{ name: zoomLink, params: { picId: $index}}">
-                        <div class="img_div">
-                            <img class="lazyload pics"
-                                 data-expand="-100"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 data-src="{{folders.mid + pic.name}}" 
-                                 alt="{{pic.alt}}" 
-                                 >
-                        </div>
-                    </a>    
-                </div>
-            </div>
+            <router-view></router-view>
+
         </section>
-
-    <router-view></router-view>
-
-
-
 
     <template id="popup">
         <div class="popup-mask" transition="popup">  
@@ -86,18 +65,38 @@
                         <p>Date: {{currentPic.date}}</p>
                         <p>Location: {{currentPic.location}}</p>
                         <p>"{{currentPic.alt}}"</p>
+
                     </div>
+
                 </div>
             </div>
-
         </div>
+ </template> 
+
+        |
+        <template id="gallery_template"> 
+            <div id="gallery" class="gallery" >
+                <figure v-for="pic in gallery" class="gallery_item">
+                    <a v-bind:href="folders.mid + pic.name" data-size="1290x855">
+                        <div class="img_div">
+                            <img class="lazyload pics"
+                                 data-expand="-100"
+                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                 data-src="{{folders.mid + pic.name}}" 
+                                 alt="{{pic.alt}}" 
+                                 >
+                        </div>
+                    </a> 
+
+                </figure>
+            </div>
+        </template> 
 
 
-    </template>
-    <script src="js/hammer.min.js" type="text/javascript"></script>
-    <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
-    <script src="js/vue.js" type="text/javascript"></script>
-    <script src="js/vue-router.js" type="text/javascript"></script>
-    <script src="js/app.js" type="text/javascript"></script>
-</body>
+
+        <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+        <script src="js/vue.js" type="text/javascript"></script>
+        <script src="js/vue-router.js" type="text/javascript"></script>
+        <script src="js/app.js" type="text/javascript"></script>
+    </body>
 </html>
