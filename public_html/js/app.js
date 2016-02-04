@@ -88,18 +88,18 @@ var sortedbynew = Vue.extend({
     },
     data: function () {
         return {
-            zoomLink: "sortedbynew"
+            zoomLink: "/sortedbynew/"
         };
     },
     computed: {
         gallery: function () {
-            if(this.$parent.gallery) {
-            var pics = this.$parent.gallery.slice();
-            pics.reverse();
-            return pics;
-        } else {
-            return '';
-        }
+            if (this.$parent.gallery) {
+                var pics = this.$parent.gallery.slice();
+                pics.reverse();
+                return pics;
+            } else {
+                return '';
+            }
         },
         folders: function () {
             return this.$parent.folders;
@@ -107,7 +107,7 @@ var sortedbynew = Vue.extend({
         length: function () {
             return this.$parent.length;
         }
-        
+
     }
 });
 
@@ -118,17 +118,17 @@ var sortedbyold = Vue.extend({
     },
     data: function () {
         return {
-            zoomLink: "sortedbyold"
+            zoomLink: "/sortedbyold/"
         };
     },
     computed: {
         gallery: function () {
-            if(this.$parent.gallery) {
-            var pics_notsorted = this.$parent.gallery;
-            return pics_notsorted;
-        } else {
-            return '';
-        }
+            if (this.$parent.gallery) {
+                var pics_notsorted = this.$parent.gallery;
+                return pics_notsorted;
+            } else {
+                return '';
+            }
         },
         folders: function () {
             return this.$parent.folders;
@@ -140,10 +140,95 @@ var sortedbyold = Vue.extend({
 });
 
 var zoom = Vue.extend({
-     template: "#popup",
-     
-     
-}); 
+    template: "#popup",
+    ready: function () {
+        this.swipe();
+    },
+    computed: {
+        index: function () {
+            if (this.$route.params.picId) {
+                return this.$route.params.picId;
+            } else {
+                return 0;
+            }
+        },
+        currentPic: function () {
+            var self = this;
+            if (self.$parent.gallery) {
+                var pic = self.$parent.gallery[self.index];
+                return pic;
+            } else {
+                return '';
+            }
+        },
+        currentPicSrc: function () {
+            var self = this;
+            if (self.$parent.gallery) {
+                var pic = self.$parent.gallery[self.index];
+                return this.$parent.folders.zoom + pic.name;
+            } else {
+                return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+            }
+        },
+        sortLink: function () {
+            return this.$route.router;
+        },
+        nextpic: function () {
+            var check = this.$parent.length;
+            var index = parseInt(this.index);
+            if ((index + 1) === check) {
+                return 0;
+            } else {
+                return index + 1;
+            }
+        },
+        prevpic: function () {
+            var check = this.$parent.length;
+            var index = parseInt(this.index);
+            if (index === 0) {
+                return check - 1;
+            } else {
+                return index - 1;
+            }
+        },
+        imgClass: function () {
+            if (this.currentPic.ratio === "portrait") {
+                return 'img_link_port';
+            } else {
+                return 'img_link_land';
+            }
+        },
+        popClass: function () {
+            if (this.currentPic.ratio === "portrait") {
+                return 'popup-container-h';
+            } else {
+                return '';
+            }
+        }
+    },
+    methods: {
+        imgChange: function () {
+
+        },
+        swipe: function () {
+            var self = this;
+            var myElement = document.getElementById('swipe_div');
+            var mc = new Hammer(myElement);
+            mc.on('swipeleft', function () {
+                var path = {name: self.zoomLink, params: {picId: self.nextpic}};
+                router.go(path);
+                self.imgChange();
+            });
+            mc.on('swiperight', function () {
+                var path = {name: self.zoomLink, params: {picId: self.prevpic}};
+                router.go(path);
+                self.imgChange();
+            });
+        }
+    }
+
+
+});
 
 var router = new VueRouter({
 });
@@ -156,22 +241,20 @@ router.redirect({
 router.map({
     '/sortedbynew': {
         component: sortedbynew,
-         subRoutes: {
-             '/:picId' : {
-                 name: 'gallery',
-                 component: 'zoom'
-             }
-         }
+        subRoutes: {
+            '/:picId': {
+                component: zoom
+            }
+        }
 
     },
     '/sortedbyold': {
         component: sortedbyold,
-         subRoutes: {
-             '/:picId' : {
-                 name: 'gallery',
-                 component: 'zoom'
-             }
-         }
+                subRoutes: {
+                    '/:picId': {
+                        component: zoom
+                    }
+                }
     }
 
 

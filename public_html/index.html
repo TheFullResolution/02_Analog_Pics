@@ -34,51 +34,12 @@
 
         </section>
 
-    <template id="popup">
-        <div class="popup-mask" transition="popup">  
-            <div class="popup-wrapper" id="swipe_div">
-                <p class="text_close">click on the image to close</p>
-                <div class="popup-container" >
-                    <div class="popup-img-div"
-                         v-bind:class="popClass">
-                        <a  v-link="{ name: zoomLink, params: { picId: prevpic}}" 
-                            v-on:click="imgChange" class="arrows">
-                            <img src="img/left.svg" alt="left arrow" >
-                        </a> 
 
-                        <a v-link="{ path: sortLink }" class="img_link"> 
 
-                            <img class="lazyload img_link_img"
-                                 v-bind:class="imgClass"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 data-src="{{currentPicSrc}}" 
-                                 alt="{{currentPic.alt}}" 
-                                 >
-
-                        </a>
-                        <a  v-link="{ name: zoomLink, params: { picId: nextpic}}" 
-                            v-on:click="imgChange" class="arrows">
-                            <img src="img/right.svg" alt="left arrow" >
-                        </a>
-                    </div>
-                    <div class="popup-details">
-                        <p>Date: {{currentPic.date}}</p>
-                        <p>Location: {{currentPic.location}}</p>
-                        <p>"{{currentPic.alt}}"</p>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <router-view></router-view>
- </template> 
-
-        |
         <template id="gallery_template"> 
             <div id="gallery" class="gallery" >
                 <figure v-for="pic in gallery" class="gallery_item">
-                    <a v-bind:href="folders.mid + pic.name">
+                    <a v-link="zoomLink + $index ">
                         <div class="img_div">
                             <img class="lazyload pics"
                                  data-expand="-100"
@@ -91,11 +52,48 @@
 
                 </figure>
             </div>
+            <router-view></router-view>
         </template> 
+    
+        <template id="popup">
+        <div class="popup_mask" transition="popup">  
+                <div class="popup_container" id="swipe_div" >
+                    <div class="popup_img_div"
+                         v-bind:class="popClass">
+                        <a   
+                            v-on:click="imgChange" class="arrows left">
+                            <img src="img/left.svg" alt="left arrow" >
+                        </a> 
 
+                        <a  class="img_link"> 
 
+                            <img class="lazyload img_link_img"
+                                 v-bind:class="imgClass"
+                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                 data-src="{{currentPicSrc}}" 
+                                 alt="{{currentPic.alt}}" 
+                                 >
+
+                        </a>
+                        <a v-on:click="imgChange" class="arrows right">
+                            <img src="img/right.svg" alt="right arrow" >
+                        </a>
+                    </div>
+                    <div class="popup_details">
+                        <p>Date: {{currentPic.date}}</p>
+                        <p>Location: {{currentPic.location}}</p>
+                        <p>"{{currentPic.alt}}"</p>
+
+                    </div>
+
+                </div>
+            </div>
+
+        
+ </template> 
 
         <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+        <script src="js/hammer.min.js" type="text/javascript"></script>
         <script src="js/vue.js" type="text/javascript"></script>
         <script src="js/vue-router.js" type="text/javascript"></script>
         <script src="js/app.js" type="text/javascript"></script>
