@@ -1,9 +1,6 @@
 /* global Vue */
 
 
-
-
-
 var url = "js/lazysizes.min.js";
 
 var allPics = Vue.extend({
@@ -69,7 +66,6 @@ var allPics = Vue.extend({
             }, 500);
         },
         downloadlazyload: function () {
-            var self = this;
             $.ajax({
                 url: url,
                 dataType: 'script',
@@ -89,7 +85,6 @@ var sortedbynew = Vue.extend({
     template: "#gallery_template",
     ready: function () {
         this.$parent.sorted = false;
-        initPhotoSwipeFromDOM('#gallery');
     },
     data: function () {
         return {
@@ -113,7 +108,6 @@ var sortedbyold = Vue.extend({
     template: "#gallery_template",
     ready: function () {
         this.$parent.sorted = true;
-        initPhotoSwipeFromDOM('#gallery');
     },
     data: function () {
         return {
