@@ -85,10 +85,11 @@ var sortedbynew = Vue.extend({
     template: "#gallery_template",
     ready: function () {
         this.$parent.sorted = false;
+        $('body').css('overflow', 'auto');
     },
     data: function () {
         return {
-            zoomLink: "/sortedbynew/"
+            zoomLink: "/sortedbynew"
         };
     },
     computed: {
@@ -115,10 +116,11 @@ var sortedbyold = Vue.extend({
     template: "#gallery_template",
     ready: function () {
         this.$parent.sorted = true;
+        $('body').css('overflow', 'auto');
     },
     data: function () {
         return {
-            zoomLink: "/sortedbyold/"
+            zoomLink: "/sortedbyold"
         };
     },
     computed: {
@@ -143,6 +145,7 @@ var zoom = Vue.extend({
     template: "#popup",
     ready: function () {
         this.swipe();
+        $('body').css('overflow', 'hidden');
     },
     computed: {
         index: function () {
@@ -170,8 +173,8 @@ var zoom = Vue.extend({
                 return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             }
         },
-        sortLink: function () {
-            return this.$route.router;
+        link: function () {
+            return this.$parent.zoomLink;
         },
         nextpic: function () {
             var check = this.$parent.length;
@@ -208,19 +211,27 @@ var zoom = Vue.extend({
     },
     methods: {
         imgChange: function () {
-
+            $(".img_link_img").attr("src","data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+            $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
+        },
+        details: function () {
+            if($( ".popup_details" ).hasClass( "details_no" )) {
+                 $('.popup_details').removeClass('details_no').addClass('details_show');
+            } else {
+                 $('.popup_details').removeClass('details_show').addClass('details_no');
+            }
         },
         swipe: function () {
             var self = this;
             var myElement = document.getElementById('swipe_div');
             var mc = new Hammer(myElement);
             mc.on('swipeleft', function () {
-                var path = {name: self.zoomLink, params: {picId: self.nextpic}};
+                var path = {path: self.link + '/' + self.nextpic};
                 router.go(path);
                 self.imgChange();
             });
             mc.on('swiperight', function () {
-                var path = {name: self.zoomLink, params: {picId: self.prevpic}};
+                var path = {path: self.link + '/' + self.prevpic};
                 router.go(path);
                 self.imgChange();
             });
@@ -229,6 +240,8 @@ var zoom = Vue.extend({
 
 
 });
+
+
 
 var router = new VueRouter({
 });
@@ -242,6 +255,14 @@ router.map({
     '/sortedbynew': {
         component: sortedbynew,
         subRoutes: {
+            '/': {
+                component: {
+                    template: '',
+                    ready: function () {
+                        $('body').css('overflow', 'auto');
+                    }
+                }
+            },
             '/:picId': {
                 component: zoom
             }
@@ -250,11 +271,19 @@ router.map({
     },
     '/sortedbyold': {
         component: sortedbyold,
-                subRoutes: {
-                    '/:picId': {
-                        component: zoom
+        subRoutes: {
+            '/': {
+                component: {
+                    template: '',
+                    ready: function () {
+                        $('body').css('overflow', 'auto');
                     }
                 }
+            },
+            '/:picId': {
+                component: zoom
+            }
+        }
     }
 
 

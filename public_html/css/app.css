@@ -134,8 +134,6 @@ h4 {
     -webkit-transition-delay: 0.3s; /* Safari */
     transition-delay: 0.3s;
     -webkit-transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
 }
@@ -145,23 +143,26 @@ h4 {
      POPup
 ************************/
 .popup_mask {
-  overflow: hidden;
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0, 0, 0);
-  display: table;
-  transition: opacity .3s ease;
-  
+    overflow: hidden;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    display: table;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+
 }
 
 .popup_container {
     display: table-cell; 
     vertical-align: middle; 
     text-align: center;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
 }
 
 .popup_img_div {
@@ -180,38 +181,65 @@ h4 {
 .img_link_img {
     max-width: 100%;
     max-height: 100%;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -webkit-transition-delay: 0.3s; /* Safari */
+    transition-delay: 0.3s;
+    opacity: 0;
 }
 
 .arrows {
     opacity: 0.5;
-    flex: 1 10%
+    flex: 1 10%;
 }
 
-.left {
-
-}
-
-.right {
-
-}
-
-.arrows > img {
+.arrows img {
     vertical-align: middle;
-    max-width: 50px;
+    max-width: 6.5vmax;
 }
 
 .popup_details {
     position: absolute;
-    bottom: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     padding-bottom: 20px;
     padding-top: 15px;
     color: rgba(246, 247, 255, 0.75);
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+}
+
+.details_show {
+    bottom: 0;
+}
+
+.details_no {
+    bottom: -500px;
 }
 
 .popup_details p {
     margin: 0;
+}
+
+.close_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.close_btn a img {
+    width: 3.5vmax;
+    padding: 1em;
+}
+
+.popup-enter, .popup-leave {
+    opacity: 0;
+}
+
+.popup-enter .popup_container,
+.popup-leave .popup_container {
+    -webkit-transform: scale(.1);
+    transform: scale(.1);
 }
 
 /******************
@@ -242,7 +270,8 @@ h4 {
 @media screen and (max-width: 550px) { 
     .gallery_item {
         max-width: 100%;
-        flex: 1 100%;}
+        flex: 1 100%;
+    }
 }
 
 
