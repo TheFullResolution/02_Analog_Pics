@@ -36,70 +36,83 @@
 
 
 
-        <template id="gallery_template"> 
-            <div id="gallery" class="gallery" >
-                <figure v-for="pic in gallery" class="gallery_item">
-                    <a v-link="zoomLink +'/' + $index">
-                        <div class="img_div">
-                            <img class="lazyload pics"
-                                 data-expand="-100"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 data-src="{{folders.mid + pic.name}}" 
-                                 alt="{{pic.alt}}" 
-                                 >
-                        </div>
-                    </a> 
-                </figure>
-            </div>
-             <router-view></router-view>
-        </template> 
-    
-        <template id="popup">
+    <template id="gallery_template"> 
+        <div id="gallery" class="gallery" >
+            <figure v-for="pic in gallery" class="gallery_item">
+                <a v-link="zoomLink +'/' + $index">
+                    <div class="img_div">
+                        <img class="lazyload pics"
+                             data-expand="-100"
+                             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                             data-src="{{folders.mid + pic.name}}" 
+                             alt="{{pic.alt}}" 
+                             >
+                    </div>
+                </a> 
+            </figure>
+        </div>
+        <router-view ></router-view>
+    </template> 
+
+    <template id="popup">
         <div class="popup_mask" transition="popup">  
-                <div class="popup_container" id="swipe_div" >
+            <div class="popup_container" id="swipe_div" >
+
+                <div class="popup_details_top details_show_up">
+                    <div>
+                        <a v-bind:href="fullSizeSrc" download>
+
+                            &#10515; Download full resolution 
+                        </a>     
+                    </div>
+                    <div>
+                        <p>Tap on image to hide details</p>
+                    </div>
                     <div class="close_btn">
                         <a v-link="{path: link}">
-                         <img src="img/xbutton.svg" alt="close button" >
+                            <img src="img/xbutton.svg" alt="close button" >
                         </a>
                     </div>
-                    <div class="popup_img_div"
-                         v-bind:class="popClass">
-                        <a v-link ="{path: link + '/' + prevpic}"  
-                            v-on:click="imgChange" class="arrows left">
-                            <img src="img/left.svg" alt="left arrow" >
-                        </a> 
+                </div>
 
-                        <div  class="img_link" v-on:click="details"> 
 
-                            <img class="lazyload img_link_img"
-                                 v-bind:class="imgClass"
-                                 
-                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                 data-src="{{currentPicSrc}}" 
-                                 alt="{{currentPic.alt}}" 
-                                 >
+                <div class="popup_img_div"
+                     v-bind:class="popClass">
+                    <a v-link ="{path: link + '/' + prevpic}"  
+                       v-on:click="imgChange" class="arrows left">
+                        <img src="img/left.svg" alt="left arrow" >
+                    </a> 
 
-                        </div>
-                        <a v-link ="{path: link + '/' + nextpic}"
-                            v-on:click="imgChange" class="arrows right">
-                            <img src="img/right.svg" alt="right arrow" >
-                        </a>
-                    </div>
-                    <div class="popup_details details_no" >
-                        <p>Date: {{currentPic.date}}</p>
-                        <p>Location: {{currentPic.location}}</p>
-                        <p>"{{currentPic.alt}}"</p>
+                    <div  class="img_link" v-on:click="details"> 
+
+                        <img class="img_link_img lazyload"
+                             v-bind:class="imgClass"
+                             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                             data-src="{{currentPicSrc}}" 
+                             alt="{{currentPic.alt}}" 
+                             >
 
                     </div>
+                    <a v-link ="{path: link + '/' + nextpic}"
+                       v-on:click="imgChange" class="arrows right">
+                        <img src="img/right.svg" alt="right arrow" >
+                    </a>
+                </div>
+                <div class="popup_details details_show" >
+                    <p>Date: {{currentPic.date}}</p>
+                    <p>Location: {{currentPic.location}}</p>
+                    <p>"{{currentPic.alt}}"</p>
 
                 </div>
-            </div>
- </template> 
 
-        <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
-        <script src="js/hammer.min.js" type="text/javascript"></script>
-        <script src="js/vue.js" type="text/javascript"></script>
-        <script src="js/vue-router.js" type="text/javascript"></script>
-        <script src="js/app.js" type="text/javascript"></script>
-    </body>
+            </div>
+        </div>
+    </template> 
+
+    <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="js/hammer.min.js" type="text/javascript"></script>
+    <script src="js/vue.js" type="text/javascript"></script>
+    <script src="js/vue-router.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+</body>
 </html>

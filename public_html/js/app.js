@@ -85,7 +85,6 @@ var sortedbynew = Vue.extend({
     template: "#gallery_template",
     ready: function () {
         this.$parent.sorted = false;
-        $('body').css('overflow', 'auto');
     },
     data: function () {
         return {
@@ -116,7 +115,6 @@ var sortedbyold = Vue.extend({
     template: "#gallery_template",
     ready: function () {
         this.$parent.sorted = true;
-        $('body').css('overflow', 'auto');
     },
     data: function () {
         return {
@@ -144,8 +142,8 @@ var sortedbyold = Vue.extend({
 var zoom = Vue.extend({
     template: "#popup",
     ready: function () {
-        this.swipe();
         $('body').css('overflow', 'hidden');
+        this.swipe();
     },
     computed: {
         index: function () {
@@ -160,6 +158,15 @@ var zoom = Vue.extend({
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
                 return pic;
+            } else {
+                return '';
+            }
+        },
+        fullSizeSrc: function () {
+            var self = this;
+            if (self.$parent.gallery) {
+                var pic = self.$parent.gallery[self.index];
+                return this.$parent.folders.full + pic.name;
             } else {
                 return '';
             }
@@ -198,12 +205,12 @@ var zoom = Vue.extend({
             if (this.currentPic.ratio === "portrait") {
                 return 'img_link_port';
             } else {
-                return 'img_link_land';
+                return '.img_link_land';
             }
         },
         popClass: function () {
             if (this.currentPic.ratio === "portrait") {
-                return 'popup-container-h';
+                return 'popup_container_h';
             } else {
                 return '';
             }
@@ -211,14 +218,16 @@ var zoom = Vue.extend({
     },
     methods: {
         imgChange: function () {
-            $(".img_link_img").attr("src","data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+            $(".img_link_img").attr("src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
             $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
         },
         details: function () {
-            if($( ".popup_details" ).hasClass( "details_no" )) {
-                 $('.popup_details').removeClass('details_no').addClass('details_show');
+            if ($(".popup_details").hasClass("details_no")) {
+                $('.popup_details').removeClass('details_no').addClass('details_show');
+                $('.popup_details_top').removeClass('details_no_up').addClass('details_show_up');
             } else {
-                 $('.popup_details').removeClass('details_show').addClass('details_no');
+                $('.popup_details').removeClass('details_show').addClass('details_no');
+                $('.popup_details_top').removeClass('details_show_up').addClass('details_no_up');
             }
         },
         swipe: function () {

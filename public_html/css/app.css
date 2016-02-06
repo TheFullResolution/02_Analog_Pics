@@ -166,7 +166,6 @@ h4 {
 }
 
 .popup_img_div {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,18 +174,32 @@ h4 {
 .img_link {
     box-sizing: border-box;   
     flex: 1 80%;
+}
+
+.popup_container_h {
     height: 90vmin;
 }
 
 .img_link_img {
-    max-width: 100%;
     max-height: 100%;
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
+    max-width: 100%;
     -webkit-transition-delay: 0.3s; /* Safari */
     transition-delay: 0.3s;
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
     opacity: 0;
 }
+
+.img_link_port {
+    width: auto;
+    height: 100%;
+}
+
+.img_link_land {
+    width: 100%;
+    height: auto;
+}
+
 
 .arrows {
     opacity: 0.5;
@@ -198,6 +211,7 @@ h4 {
     max-width: 6.5vmax;
 }
 
+.popup_details_top,
 .popup_details {
     position: absolute;
     width: 100%;
@@ -207,24 +221,38 @@ h4 {
     color: rgba(246, 247, 255, 0.75);
     transition: all .5s ease;
     -webkit-transition: all .5s ease;
+    font-size: 2.5vmax;
+}
+
+.popup_details_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .details_show {
     bottom: 0;
 }
 
+.details_show_up {
+    top: 0;
+}
+
+.details_no_up {
+    top: -500px;
+}
+
 .details_no {
     bottom: -500px;
 }
 
+.popup_details_top p,
 .popup_details p {
     margin: 0;
 }
 
 .close_btn {
-    position: absolute;
-    top: 0;
-    right: 0;
+    
 }
 
 .close_btn a img {
@@ -242,9 +270,38 @@ h4 {
     transform: scale(.1);
 }
 
+
+/******************
+     Router transition
+************************/
+.test {
+  transition: all .1s ease;
+}
+
+.test-enter, .test-leave {
+  opacity: 0;
+}
+
+
+
 /******************
      Media for page
 ************************/
+
+
+@media screen and (min-width: 1024px) { 
+    .popup_details_top,
+    .popup_details { 
+        font-size: 2vmin;
+    }
+    .close_btn a img {
+        width: 3.5vmin;;
+    }
+    .arrows img {
+    max-width: 6.5vmin;
+}
+}
+
 
 @media screen and (max-width: 990px) { 
     .text {
