@@ -14,7 +14,8 @@ var allPics = Vue.extend({
                 zoom: "img/gallery/zoom/"
             },
             sorted: false,
-            piczoom: false
+            piczoom: false,
+            windowWidth: ''
         };
     },
     computed: {
@@ -40,6 +41,20 @@ var allPics = Vue.extend({
                 return "/sortedbynew";
             } else {
                 return "/sortedbyold";
+            }
+        },
+        folderGallery: function () {
+            if ($(window).width() < 740) {
+                return this.folders.small;
+            } else {
+                return this.folders.mid;
+            }
+        },
+        zoomGallery: function () {
+            if ($(window).width() < 740) {
+                return this.folders.mid;
+            } else {
+                return this.folders.zoom;
             }
         }
     },
@@ -102,7 +117,13 @@ var sortedbynew = Vue.extend({
             }
         },
         folders: function () {
-            return this.$parent.folders;
+            return this.$parent.folderGallery;
+        },
+        zoomGallery: function () {
+            return this.$parent.zoomGallery;
+        }, 
+        folderFull: function () {
+            return this.$parent.folders.full;
         },
         length: function () {
             return this.$parent.length;
@@ -131,7 +152,13 @@ var sortedbyold = Vue.extend({
             }
         },
         folders: function () {
-            return this.$parent.folders;
+            return this.$parent.folderGallery;
+        },
+        folderFull: function () {
+            return this.$parent.folders.full;
+        },
+        zoomGallery: function () {
+            return this.$parent.zoomGallery;
         },
         length: function () {
             return this.$parent.length;
@@ -148,7 +175,7 @@ var zoom = Vue.extend({
     computed: {
         index: function () {
             if (this.$route.params.picId) {
-                return this.$route.params.picId;
+                return parseInt(this.$route.params.picId) - 1;
             } else {
                 return 0;
             }
@@ -166,7 +193,7 @@ var zoom = Vue.extend({
             var self = this;
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
-                return this.$parent.folders.full + pic.name;
+                return this.$parent.folderFull+ pic.name;
             } else {
                 return '';
             }
@@ -175,7 +202,7 @@ var zoom = Vue.extend({
             var self = this;
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
-                return this.$parent.folders.zoom + pic.name;
+                return this.$parent.zoomGallery + pic.name;
             } else {
                 return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             }
@@ -185,20 +212,18 @@ var zoom = Vue.extend({
         },
         nextpic: function () {
             var check = this.$parent.length;
-            var index = parseInt(this.index);
-            if ((index + 1) === check) {
-                return 0;
+            if ((this.index + 1) === check) {
+                return 1;
             } else {
-                return index + 1;
+                return this.index + 2;
             }
         },
         prevpic: function () {
             var check = this.$parent.length;
-            var index = parseInt(this.index);
-            if (index === 0) {
-                return check - 1;
+            if (this.index === 0) {
+                return check;
             } else {
-                return index - 1;
+                return this.index;
             }
         },
         imgClass: function () {

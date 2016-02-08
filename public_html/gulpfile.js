@@ -49,18 +49,18 @@ gulp.task("jpg", function () {
         }
     });
 
-    var name = function() {
-                    if (index < 10) {
-                        prename = '000';
-                    } else if (index < 100 && index >= 10) {
-                        prename = '00';
-                    } else if (index >= 100) {
-                        prename = '0';
-                    }
-                    
-                    
-                    return prename + index++;
-                };
+    var name = function () {
+        if (index < 10) {
+            prename = '000';
+        } else if (index < 100 && index >= 10) {
+            prename = '00';
+        } else if (index >= 100) {
+            prename = '0';
+        }
+
+
+        return prename + index++;
+    };
 
     return gulp.src('img/new/**.{jpg,JPG}')
             .pipe(chmod(666))
@@ -106,13 +106,12 @@ gulp.task("json", function () {
             .pipe(gulp.dest('img'));
 });
 
-
-
-
 gulp.task("concatScripts", function () {
     return gulp.src([
-        'js/jquery-2.1.4.min.js',
+        'js/jquery-2.2.0.min.js',
+        'js/hammer.min.js',
         'js/vue.min.js',
+        'js/vue-router.min.js',
         'js/app.js'
     ])
             .pipe(maps.init())
@@ -129,7 +128,7 @@ gulp.task("minifyScripts", ["concatScripts"], function () {
 gulp.task("concatCSS", function () {
     return gulp.src([
         'css/normalize.css',
-        'css/main.css'
+        'css/app.css'
     ])
             .pipe(maps.init())
             .pipe(concat('app.concat.css'))
@@ -138,13 +137,14 @@ gulp.task("concatCSS", function () {
 });
 gulp.task("minifyCSS", ["concatCSS"], function () {
     return gulp.src("css/app.concat.css")
-            .pipe(cssnano({compatibility: 'ie8'}))
+            .pipe(cssnano({compatibility: 'ie9'}))
             .pipe(rename('app.min.css'))
             .pipe(gulp.dest('css'));
 });
 gulp.task("build", ['minifyScripts', 'minifyCSS'], function () {
-    return gulp.src(["css/app.min.css", "js/app.min.js", "js/projects.json",
-        "img/**", "fonts/**", "favicon.ico"], {base: './'})
+    return gulp.src(["css/app.min.css", "js/app.min.js", "js/gallery.json",
+        "js/lazysizes.min.js", "img/gallery/**", "img/**.{svg,gif}",
+        "fonts/**"], {base: './'})
             .pipe(gulp.dest('dist'));
 });
 gulp.task('replace', function () {

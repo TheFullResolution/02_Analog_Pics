@@ -29,6 +29,7 @@ a:visited {
 
 header {
     height: 300px;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +54,6 @@ header {
 .sort p {
     display: inline-block;
 }
-
 
 .move {
     width: 25px;
@@ -89,7 +89,6 @@ header {
     width: 20px;
 }
 
-
 /******************
      Section
 ************************/
@@ -99,6 +98,7 @@ h4 {
 }
 
 .gallery {
+    text-align: center;
     max-width: 960px;
     margin: 0 auto;
     display: flex;
@@ -109,7 +109,7 @@ h4 {
     margin: 0;
     max-width: 50%;
     flex: 1 50%;
-    box-sizing: border-box;    
+    box-sizing: border-box;
     transition: all .5s ease;
     -webkit-transition: all .5s ease;
 }
@@ -120,7 +120,6 @@ h4 {
     overflow: hidden;
 }
 
-
 .img_div img {
     cursor: pointer;
     cursor: -webkit-zoom-in;
@@ -128,7 +127,6 @@ h4 {
     cursor: zoom-in;
     width: 100%;
 }
-
 
 .pics {
     -webkit-transition-delay: 0.3s; /* Safari */
@@ -138,14 +136,13 @@ h4 {
     opacity: 0;
 }
 
-
 /******************
-     POPup
+     POPUP SECTION
 ************************/
 .popup_mask {
     overflow: hidden;
     position: fixed;
-    z-index: 9998;
+    z-index: 999;
     top: 0;
     left: 0;
     width: 100%;
@@ -154,12 +151,11 @@ h4 {
     display: table;
     transition: all .5s ease;
     -webkit-transition: all .5s ease;
-
 }
 
 .popup_container {
-    display: table-cell; 
-    vertical-align: middle; 
+    display: table-cell;
+    vertical-align: middle;
     text-align: center;
     transition: all .5s ease;
     -webkit-transition: all .5s ease;
@@ -171,19 +167,19 @@ h4 {
     align-items: center;
 }
 
-.img_link {
-    box-sizing: border-box;   
-    flex: 1 80%;
+.popup_container_h {
+    height: 95vmin;
 }
 
-.popup_container_h {
-    height: 90vmin;
+.img_link {
+    flex: 1 80%;
+    height: 100%;
 }
 
 .img_link_img {
     max-height: 100%;
     max-width: 100%;
-    -webkit-transition-delay: 0.3s; /* Safari */
+    -webkit-transition-delay: 0.3s;/* Safari */
     transition-delay: 0.3s;
     transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;
@@ -200,7 +196,6 @@ h4 {
     height: auto;
 }
 
-
 .arrows {
     opacity: 0.5;
     flex: 1 10%;
@@ -208,11 +203,12 @@ h4 {
 
 .arrows img {
     vertical-align: middle;
-    max-width: 6.5vmax;
+    max-width: 60px;
 }
-
+/*******************DETAILS**/
 .popup_details_top,
 .popup_details {
+    z-index: 9999;
     position: absolute;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
@@ -221,14 +217,10 @@ h4 {
     color: rgba(246, 247, 255, 0.75);
     transition: all .5s ease;
     -webkit-transition: all .5s ease;
-    font-size: 2.5vmax;
 }
 
-.popup_details_top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
+/*****HIDE AND SHOW***/
 
 .details_show {
     bottom: 0;
@@ -238,13 +230,15 @@ h4 {
     top: 0;
 }
 
+.details_no {
+    bottom: -500px;
+}
+
 .details_no_up {
     top: -500px;
 }
 
-.details_no {
-    bottom: -500px;
-}
+/****SIZES AND MARGINS FOR DETAILS***/
 
 .popup_details_top p,
 .popup_details p {
@@ -252,13 +246,35 @@ h4 {
 }
 
 .close_btn {
-    
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .close_btn a img {
-    width: 3.5vmax;
+    width: 2em;
     padding: 1em;
 }
+
+.download_fullsize {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.download_fullsize a p{
+    padding: 1em;
+    color: rgba(246, 247, 255, 0.75);
+    font-size: 0.9em;
+}
+
+.tab_text p{
+    font-size: 0.8em;
+}
+
+
+
+/*******************ANIMATION**/
 
 .popup-enter, .popup-leave {
     opacity: 0;
@@ -270,73 +286,55 @@ h4 {
     transform: scale(.1);
 }
 
-
-/******************
-     Router transition
-************************/
-.test {
-  transition: all .1s ease;
-}
-
-.test-enter, .test-leave {
-  opacity: 0;
-}
-
-
-
 /******************
      Media for page
 ************************/
 
-
-@media screen and (min-width: 1024px) { 
-    .popup_details_top,
-    .popup_details { 
-        font-size: 2vmin;
-    }
-    .close_btn a img {
-        width: 3.5vmin;;
-    }
-    .arrows img {
-    max-width: 6.5vmin;
-}
-}
-
-
-@media screen and (max-width: 990px) { 
+@media screen and (max-width: 990px) {
     .text {
         margin-left: 15px;
         margin-right: 15px;
     }
 }
 
-
 @media screen and (max-width: 740px) {
     header {
         height: 200px;
     }
-    .popup-details {
-        padding-top: 5px;
-        padding-bottom: 5px;
+    .popup_details p {
+        font-size: 0.9em;
     }
-    .text_close {
-        font-size: 0.5em;
+    .tab_text p{
+        font-size: 0.7em;
+    }
+    .download_fullsize a p{
+        font-size: 0.7em;
+    }
+    .arrows img {
+        max-width: 40px;
+    }
+    .download_fullsize {
+        max-width: 120px;
     }
 }
 
-@media screen and (max-width: 550px) { 
+@media screen and (max-width: 550px) {
     .gallery_item {
         max-width: 100%;
         flex: 1 100%;
     }
+    .arrows img {
+        width: 30px;
+    }
 }
 
-
-@media screen and (max-width: 490px) { 
-    .popup-details p {
-        font-size: 0.8em;
+@media screen and (max-width: 420px) {
+    .download_fullsize {
+        display: none;
     }
-
+    .arrows img {
+        width: 10px;
+    }
 }
 
 .lazyloaded {
