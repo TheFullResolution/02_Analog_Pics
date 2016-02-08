@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Analog Pics</title>
+        <title>Analog Pics - Photo Gallery</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="description" content="No filters, no Photoshop - just scanned analog pics, made with Zenit 12xp">
+        <meta name="keywords" content="Analog, Photography, Images">
+        <meta name="author" content="Jedrzej Lewandowski">
         <!-- build:css -->
         <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
         <link href="css/app.css" rel="stylesheet" type="text/css"/>
@@ -12,93 +14,104 @@
         <link rel="shortcut icon" href="">
     </head>
     <body>
-        <header>
-            <img class="lazyload banner pics"
-                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                 data-src="img/Banner.gif"
-                 alt="banner" />
-        </header>
-        <section>
-            <div class="sort">
-                <h4>No filters, no Photoshop - just scanned analog pics, made with Zenit 12xp</h4>
-                <p id="sort_text" class="text_show">{{sortStatus}}</p>
-                <a v-on:click="sort" v-link="{ path: sortLink }"
-                   id="sort_icon" class="sort_link">
-                    <img src="img/sort.svg" alt="sort icon" id="sort_arrows" class="move"/>
-                </a>
-            </div>
-            <router-view></router-view>
-        </section>
-        <script type="text/x-template" id="gallery_template">
+        <div>
+            <header>
+                <img class="lazyload banner pics"
+                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     data-src="img/Banner.gif"
+                     alt="banner" />
+            </header>
+            <section>
+                <div class="sort">
+                    <h4>No filters, no Photoshop - just scanned analog pics, made with Zenit 12xp</h4>
+                    <p id="sort_text" class="text_show">{{sortStatus}}</p>
+                    <a v-on:click="sort" v-link="{ path: sortLink }"
+                       id="sort_icon" class="sort_link">
+                        <img src="img/sort.svg" alt="sort icon" id="sort_arrows" class="move"/>
+                    </a>
+                </div>
+                <router-view></router-view>
+            </section>
+            <footer class="icons">
+                <a href="mailto:thefullresolution@gmail.com" target="blank">
+                    <img src="img/mail.png" alt="mail icon" class="icon"></a>
+                <a href="https://www.linkedin.com/in/lewandowskijedrzej" target="blank">
+                    <img src="img/linkedin.png" alt="linkedin icon" class="icon"></a>
+                <a href="https://twitter.com/tFullResolution" target="blank" >
+                    <img src="img/twitter_logo.png" alt="titter icon" class="icon"></a>
+                <a href="https://github.com/TheFullResolution" target="blank">
+                    <img src="img/git_logo.png" alt="github icon" class="icon"></a>
+            </footer>
+            <script type="text/x-template" id="gallery_template">
                 <div id="gallery" class="gallery" >
-                    <figure v-for="pic in gallery" class="gallery_item">
-                        <a v-link="zoomLink +'/' + (parseInt($index) + 1)">
-                            <div class="img_div">
-                                <img class="lazyload pics"
-                                     data-expand="-100"
-                                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                     data-src="{{folders + pic.name}}"
-                                     alt="{{pic.alt}}"
-                                     >
-                            </div>
-                        </a>
-                    </figure>
+                <figure v-for="pic in gallery" class="gallery_item">
+                <a v-link="zoomLink +'/' + (parseInt($index) + 1)">
+                <div class="img_div">
+                <img class="lazyload pics"
+                data-expand="-100"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-src="{{folders + pic.name}}"
+                alt="{{pic.alt}}"
+                >
+                </div>
+                </a>
+                </figure>
                 </div>
                 <router-view ></router-view>
-        </script>
-        <script type="text/x-template" id="popup">
-        <div class="popup_mask" transition="popup">
-            <div class="popup_container" id="swipe_div" >
+            </script>
+            <script type="text/x-template" id="popup">
+                <div class="popup_mask" transition="popup">
+                <div class="popup_container" id="swipe_div" >
                 <div class="popup_details_top">
-                    <div class="download_fullsize">
-                        <a v-bind:href="fullSizeSrc" download>
-                            <p>&#10515; Download full resolution image</p>
-                        </a>
-                    </div>
-                    <div class="tab_text">
-                        <p>Tap on image to hide details.</p>
-                        <p>Swipe or use arrows to navigate.</p>
-                        <p>{{index + 1}}/{{$parent.length}}</p>
-                    </div>
-                    <div class="close_btn">
-                        <a v-link="{path: link}">
-                            <img src="img/xbutton.svg" alt="close button" >
-                        </a>
-                    </div>
+                <div class="download_fullsize">
+                <a v-bind:href="fullSizeSrc" download>
+                <p>&#10515; Download full resolution image</p>
+                </a>
+                </div>
+                <div class="tab_text">
+                <p>Tap on image to hide details.</p>
+                <p>Swipe or use arrows to navigate.</p>
+                <p>{{index + 1}}/{{$parent.length}}</p>
+                </div>
+                <div class="close_btn">
+                <a v-link="{path: link}">
+                <img src="img/xbutton.svg" alt="close button" >
+                </a>
+                </div>
                 </div>
                 <div class="popup_img_div"
-                     v-bind:class="popClass">
-                    <a v-link ="{path: link + '/' + prevpic}"
-                       v-on:click="imgChange" class="arrows left">
-                        <img src="img/left.svg" alt="left arrow" >
-                    </a>
-                    <div  class="img_link" v-on:click="details">
-                        <img class="img_link_img lazyload"
-                             v-bind:class="imgClass"
-                             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                             data-src="{{currentPicSrc}}"
-                             alt="{{currentPic.alt}}"
-                             >
-                    </div>
-                    <a v-link ="{path: link + '/' + nextpic}"
-                       v-on:click="imgChange" class="arrows right">
-                        <img src="img/right.svg" alt="right arrow" >
-                    </a>
+                v-bind:class="popClass">
+                <a v-link ="{path: link + '/' + prevpic}"
+                v-on:click="imgChange" class="arrows left">
+                <img src="img/left.svg" alt="left arrow" >
+                </a>
+                <div  class="img_link" v-on:click="details">
+                <img class="img_link_img lazyload"
+                v-bind:class="imgClass"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-src="{{currentPicSrc}}"
+                alt="{{currentPic.alt}}"
+                >
+                </div>
+                <a v-link ="{path: link + '/' + nextpic}"
+                v-on:click="imgChange" class="arrows right">
+                <img src="img/right.svg" alt="right arrow" >
+                </a>
                 </div>
                 <div class="popup_details" >
-                    <p>Date: {{currentPic.date}}</p>
-                    <p>Location: {{currentPic.location}}</p>
-                    <p>"{{currentPic.alt}}"</p>
+                <p>Date: {{currentPic.date}}</p>
+                <p>Location: {{currentPic.location}}</p>
+                <p>"{{currentPic.alt}}"</p>
                 </div>
-            </div>
-        </div>
-        </script>
-        <!-- build:js -->
-        <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
-        <script src="js/hammer.min.js" type="text/javascript"></script>
-        <script src="js/vue.js" type="text/javascript"></script>
-        <script src="js/vue-router.js" type="text/javascript"></script>
-        <script src="js/app.js" type="text/javascript"></script>
-        <!-- endbuild -->
+                </div>
+                </div>
+            </script>
+            <!-- build:js -->
+            <script src="js/jquery-2.2.0.min.js" type="text/javascript"></script>
+            <script src="js/hammer.min.js" type="text/javascript"></script>
+            <script src="js/vue.js" type="text/javascript"></script>
+            <script src="js/vue-router.js" type="text/javascript"></script>
+            <script src="js/app.js" type="text/javascript"></script>
+            <!-- endbuild -->
     </body>
 </html>

@@ -17,6 +17,11 @@ body {
     font-family: 'clear_sansregular', sans-serif;
 }
 
+.bodyOverflow {
+    overflow: hidden;
+    position: fixed;
+}
+
 a,
 a:visited {
     text-decoration: none;
@@ -83,7 +88,7 @@ header {
 }
 
 .sort_link {
-    padding: 5px;
+    padding: 15px;
     margin-left: 10px;
     height: 50px;
     width: 20px;
@@ -274,6 +279,26 @@ h4 {
 .popup-leave .popup_container {
     -webkit-transform: scale(.1);
     transform: scale(.1);
+}
+
+/******************
+     Footer
+************************/
+
+.icon:hover {
+    max-width: 65px;
+}
+
+.icon {
+    max-width: 50px;
+    transition: all .3s ease;
+    vertical-align: middle
+}
+
+.icons {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 /******************

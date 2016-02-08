@@ -169,7 +169,7 @@ var sortedbyold = Vue.extend({
 var zoom = Vue.extend({
     template: "#popup",
     ready: function () {
-        $('body').css('overflow', 'hidden');
+        $('body').addClass('bodyOverflow');
         this.swipe();
     },
     computed: {
@@ -289,7 +289,7 @@ router.map({
                 component: {
                     template: '',
                     ready: function () {
-                        $('body').css('overflow', 'auto');
+                        $('body').removeClass('bodyOverflow');
                     }
                 }
             },
@@ -306,7 +306,7 @@ router.map({
                 component: {
                     template: '',
                     ready: function () {
-                        $('body').css('overflow', 'auto');
+                        $('body').removeClass('bodyOverflow');
                     }
                 }
             },

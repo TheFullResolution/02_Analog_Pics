@@ -143,7 +143,7 @@ gulp.task("minifyCSS", ["concatCSS"], function () {
 });
 gulp.task("build", ['minifyScripts', 'minifyCSS'], function () {
     return gulp.src(["css/app.min.css", "js/app.min.js", "js/gallery.json",
-        "js/lazysizes.min.js", "img/gallery/**", "img/**.{svg,gif}",
+        "js/lazysizes.min.js", "img/gallery/**", "img/**.{svg,gif,png,jpg}",
         "fonts/**"], {base: './'})
             .pipe(gulp.dest('dist'));
 });
