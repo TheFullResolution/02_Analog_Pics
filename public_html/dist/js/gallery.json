@@ -96,7 +96,7 @@
             "date": "09-2015",
             "location": "Taroko, Taiwan",
             "ratio": "portrait",
-            "alt": "Budda at Hsiang-Te Temple"
+            "alt": "Buddha at Hsiang-Te Temple"
         },
         {
             "name": "0015.jpg",
@@ -285,7 +285,7 @@
             "date": "10-2015",
             "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
-            "alt": "Foggy budda"
+            "alt": "Foggy Buddha"
         },
         {
             "name": "0042.jpg",
@@ -306,14 +306,14 @@
             "date": "11-2015",
             "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
-            "alt": "Morning ligts over Scheepvaartmuseum"
+            "alt": "Morning lights over Scheepvaartmuseum"
         },
         {
             "name": "0045.jpg",
             "date": "11-2015",
             "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
-            "alt": "Morning ligts near NEMO"
+            "alt": "Morning lights near NEMO"
         },
         {
             "name": "0046.jpg",
@@ -423,14 +423,14 @@
         {
             "name": "0061.jpg",
             "date": "01-2016",
-            "location": "Bloemendaal aan Zee,the Netherlands",
+            "location": "Bloemendaal aan Zee, the Netherlands",
             "ratio": "landscape",
             "alt": "Winter seashore"
         },
         {
             "name": "0062.jpg",
             "date": "01-2016",
-            "location": "Amsterdam,the Netherlands",
+            "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
             "alt": "Sky in the winter morning"
         },
@@ -453,7 +453,7 @@
             "date": "01-2016",
             "location": "Oud-Turnhout, Belgium",
             "ratio": "landscape",
-            "alt": "Forest path, winter mornig"
+            "alt": "Forest path, winter morning"
         },
         {
             "name": "0066.jpg",
@@ -483,12 +483,5 @@
             "ratio": "landscape",
             "alt": "Green winter field"
         }
-
-
-
-
-
-
-
     ]
 }
