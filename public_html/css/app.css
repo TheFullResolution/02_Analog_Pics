@@ -215,27 +215,17 @@ h4 {
     padding-bottom: 20px;
     padding-top: 15px;
     color: rgba(246, 247, 255, 0.75);
-    transition: all .5s ease;
-    -webkit-transition: all .5s ease;
 }
 
 
 /*****HIDE AND SHOW***/
 
-.details_show {
+.popup_details {
     bottom: 0;
 }
 
-.details_show_up {
+.popup_details_top {
     top: 0;
-}
-
-.details_no {
-    bottom: -500px;
-}
-
-.details_no_up {
-    top: -500px;
 }
 
 /****SIZES AND MARGINS FOR DETAILS***/

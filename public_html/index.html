@@ -49,7 +49,7 @@
         <script type="text/x-template" id="popup">
         <div class="popup_mask" transition="popup">
             <div class="popup_container" id="swipe_div" >
-                <div class="popup_details_top details_show_up">
+                <div class="popup_details_top">
                     <div class="download_fullsize">
                         <a v-bind:href="fullSizeSrc" download>
                             <p>&#10515; Download full resolution image</p>
@@ -85,7 +85,7 @@
                         <img src="img/right.svg" alt="right arrow" >
                     </a>
                 </div>
-                <div class="popup_details details_show" >
+                <div class="popup_details" >
                     <p>Date: {{currentPic.date}}</p>
                     <p>Location: {{currentPic.location}}</p>
                     <p>"{{currentPic.alt}}"</p>

@@ -121,7 +121,7 @@ var sortedbynew = Vue.extend({
         },
         zoomGallery: function () {
             return this.$parent.zoomGallery;
-        }, 
+        },
         folderFull: function () {
             return this.$parent.folders.full;
         },
@@ -193,7 +193,7 @@ var zoom = Vue.extend({
             var self = this;
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
-                return this.$parent.folderFull+ pic.name;
+                return this.$parent.folderFull + pic.name;
             } else {
                 return '';
             }
@@ -247,13 +247,9 @@ var zoom = Vue.extend({
             $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
         },
         details: function () {
-            if ($(".popup_details").hasClass("details_no")) {
-                $('.popup_details').removeClass('details_no').addClass('details_show');
-                $('.popup_details_top').removeClass('details_no_up').addClass('details_show_up');
-            } else {
-                $('.popup_details').removeClass('details_show').addClass('details_no');
-                $('.popup_details_top').removeClass('details_show_up').addClass('details_no_up');
-            }
+            $('.popup_details').slideToggle("fast");
+            $('.popup_details_top').slideToggle("fast");
+
         },
         swipe: function () {
             var self = this;
