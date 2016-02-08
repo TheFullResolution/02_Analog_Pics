@@ -19,7 +19,6 @@ body {
 
 .bodyOverflow {
     overflow: hidden;
-    position: fixed;
 }
 
 a,
