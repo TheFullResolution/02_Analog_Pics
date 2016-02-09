@@ -169,7 +169,8 @@ var sortedbyold = Vue.extend({
 var zoom = Vue.extend({
     template: "#popup",
     ready: function () {
-        $('body').addClass('bodyOverflow');
+        $('body, html').css('overflow', 'hidden');
+        $('body').addClass('disable-scrolling');
         this.swipe();
     },
     computed: {
@@ -253,8 +254,11 @@ var zoom = Vue.extend({
         },
         swipe: function () {
             var self = this;
+            var options = {
+                preventDefault: true
+            };
             var myElement = document.getElementById('swipe_div');
-            var mc = new Hammer(myElement);
+            var mc = new Hammer(myElement, options);
             mc.on('swipeleft', function () {
                 var path = {path: self.link + '/' + self.nextpic};
                 router.go(path);
@@ -265,6 +269,7 @@ var zoom = Vue.extend({
                 router.go(path);
                 self.imgChange();
             });
+
         }
     }
 
@@ -289,7 +294,8 @@ router.map({
                 component: {
                     template: '',
                     ready: function () {
-                        $('body').removeClass('bodyOverflow');
+                        $('body, html').css('overflow', 'auto');
+                        $('body').removeClass('disable-scrolling');
                     }
                 }
             },
@@ -306,7 +312,8 @@ router.map({
                 component: {
                     template: '',
                     ready: function () {
-                        $('body').removeClass('bodyOverflow');
+                        $('body, html').css('overflow', 'auto');
+                        $('body').removeClass('disable-scrolling');
                     }
                 }
             },
@@ -325,3 +332,20 @@ router.start(allPics, 'body', function () {
 
 });
 
+document.ontouchmove = function (event) {
+
+    var isTouchMoveAllowed = true, target = event.target;
+
+    while (target !== null) {
+        if (target.classList && target.classList.contains('disable-scrolling')) {
+            isTouchMoveAllowed = false;
+            break;
+        }
+        target = target.parentNode;
+    }
+
+    if (!isTouchMoveAllowed) {
+        event.preventDefault();
+    }
+
+};

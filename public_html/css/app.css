@@ -15,10 +15,7 @@
 
 body {
     font-family: 'clear_sansregular', sans-serif;
-}
-
-.bodyOverflow {
-    overflow: hidden;
+    height: 100%;
 }
 
 a,
@@ -144,7 +141,7 @@ h4 {
      POPUP SECTION
 ************************/
 .popup_mask {
-    overflow: hidden;
+    overflow-y: auto;
     position: fixed;
     z-index: 999;
     top: 0;
@@ -155,9 +152,11 @@ h4 {
     display: table;
     transition: all .5s ease;
     -webkit-transition: all .5s ease;
+    -webkit-overflow-scrolling: touch;
 }
 
 .popup_container {
+    position: static;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
