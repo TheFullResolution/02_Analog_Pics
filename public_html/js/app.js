@@ -172,6 +172,12 @@ var zoom = Vue.extend({
         $('body, html').css('overflow', 'hidden');
         $('body').addClass('disable-scrolling');
         this.swipe();
+        this.$watch(function () {
+            return this.index;
+        },
+                function () {
+                    this.imgChange();
+                });
     },
     computed: {
         index: function () {
