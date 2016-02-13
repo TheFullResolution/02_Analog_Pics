@@ -14,12 +14,11 @@ var gulp = require('gulp'),
         changed = require('gulp-changed'),
         pngquant = require('imagemin-pngquant'),
         chmod = require('gulp-chmod'),
-        sizeOf = require('image-size'),
         fs = require('fs');
 
 
 var resizeImages = function (options) {
-    gulp.src('img/gallery/full_size/**.{jpg,JPG}')
+    gulp.src('img/gallery/full_size/**.{jpg}')
             .pipe(changed('img/gallery/' + options.folder))
             .pipe(imageResize({width: options.width}))
             .pipe(imagemin({
@@ -144,7 +143,7 @@ gulp.task("minifyCSS", ["concatCSS"], function () {
 gulp.task("build", ['minifyScripts', 'minifyCSS'], function () {
     return gulp.src(["css/app.min.css", "js/app.min.js", "js/gallery.json",
         "js/lazysizes.min.js", "img/gallery/**", "img/**.{svg,gif,png,jpg}",
-        "fonts/**"], {base: './'})
+        "fonts/**", "favicon.ico"], {base: './'})
             .pipe(gulp.dest('dist'));
 });
 gulp.task('replace', function () {
