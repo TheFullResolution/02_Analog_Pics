@@ -339,9 +339,7 @@ router.start(allPics, 'body', function () {
 });
 
 document.ontouchmove = function (event) {
-
     var isTouchMoveAllowed = true, target = event.target;
-
     while (target !== null) {
         if (target.classList && target.classList.contains('disable-scrolling')) {
             isTouchMoveAllowed = false;
@@ -353,5 +351,4 @@ document.ontouchmove = function (event) {
     if (!isTouchMoveAllowed) {
         event.preventDefault();
     }
-
 };

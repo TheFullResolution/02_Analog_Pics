@@ -141,7 +141,7 @@ h4 {
      POPUP SECTION
 ************************/
 .popup_mask {
-    overflow: hidden;
+    overflow: scroll;
     position: fixed;
     z-index: 999;
     top: 0;
@@ -192,11 +192,6 @@ h4 {
 .img_link_port {
     width: auto;
     height: 100%;
-}
-
-.img_link_land {
-    width: 100%;
-    height: auto;
 }
 
 .arrows {
