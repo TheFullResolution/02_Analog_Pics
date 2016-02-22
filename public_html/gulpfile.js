@@ -14,7 +14,10 @@ var gulp = require('gulp'),
         changed = require('gulp-changed'),
         pngquant = require('imagemin-pngquant'),
         chmod = require('gulp-chmod'),
-        fs = require('fs');
+        fs = require('fs'),
+        postcss = require('gulp-postcss'),
+        autoprefixer = require('autoprefixer'),
+        mqpacker = require('css-mqpacker');
 
 
 var resizeImages = function (options) {
@@ -159,4 +162,14 @@ gulp.task('clean', ['replace'], function () {
 });
 gulp.task("default", ['build'], function () {
     gulp.start('clean');
+});
+gulp.task('postcss', function () {
+    var processors = [
+        autoprefixer({browsers: ['last 1 version', '> 10%']}),
+        mqpacker
+    ];
+    return gulp.src('css/app.css')
+            .pipe(postcss(processors))
+            .pipe(rename('app.post.css'))
+            .pipe(gulp.dest('css/'));
 });
