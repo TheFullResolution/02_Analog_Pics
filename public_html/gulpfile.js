@@ -17,8 +17,8 @@ var gulp = require('gulp'),
         fs = require('fs'),
         postcss = require('gulp-postcss'),
         autoprefixer = require('autoprefixer'),
-        mqpacker = require('css-mqpacker');
-
+        mqpacker = require('css-mqpacker'),
+        cssnext = require('postcss-cssnext');
 
 var resizeImages = function (options) {
     gulp.src('img/gallery/full_size/**.{jpg}')
@@ -165,8 +165,9 @@ gulp.task("default", ['build'], function () {
 });
 gulp.task('postcss', function () {
     var processors = [
-        autoprefixer({browsers: ['last 1 version', '> 10%']}),
-        mqpacker
+        autoprefixer({browsers: ['last 2 versions', '> 5%']}),
+        mqpacker,
+        cssnext()
     ];
     return gulp.src('css/app.css')
             .pipe(postcss(processors))
