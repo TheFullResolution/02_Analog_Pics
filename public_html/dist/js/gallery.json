@@ -449,13 +449,6 @@
             "alt": "Golden winter"
         },
         {
-            "name": "0065.jpg",
-            "date": "01-2016",
-            "location": "Oud-Turnhout, Belgium",
-            "ratio": "landscape",
-            "alt": "Forest path, winter morning"
-        },
-        {
             "name": "0066.jpg",
             "date": "01-2016",
             "location": "Oud-Turnhout, Belgium",
@@ -482,6 +475,48 @@
             "location": "Oud-Turnhout, Belgium",
             "ratio": "landscape",
             "alt": "Green winter field"
+        },
+        {
+            "name": "0070.jpg",
+            "date": "01-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Frankendael Park winter morning"
+        },
+        {
+            "name": "0071.jpg",
+            "date": "02-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Abandoned skate park"
+        },
+        {
+            "name": "0072.jpg",
+            "date": "02-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "IJ river in the early morning"
+        },
+        {
+            "name": "0073.jpg",
+            "date": "02-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Foggy Vondelpar"
+        },
+        {
+            "name": "0074.jpg",
+            "date": "02-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Foggy Vondelpar statue"
+        },
+        {
+            "name": "0075.jpg",
+            "date": "02-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Amstel river on Sunday"
         }
     ]
 }

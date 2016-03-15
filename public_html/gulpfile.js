@@ -21,7 +21,7 @@ var gulp = require('gulp'),
         cssnext = require('postcss-cssnext');
 
 var resizeImages = function (options) {
-    gulp.src('img/gallery/full_size/**.{jpg}')
+    return gulp.src('img/gallery/full_size/*.{jpg,JPG}')
             .pipe(changed('img/gallery/' + options.folder))
             .pipe(imageResize({width: options.width}))
             .pipe(imagemin({
@@ -76,7 +76,7 @@ gulp.task("jpg", function () {
 });
 
 
-gulp.task('resize', ["jpg"], function () {
+gulp.task('resize', function () {
 
 
     var small = {
@@ -92,12 +92,12 @@ gulp.task('resize', ["jpg"], function () {
         folder: '/zoom'
     };
 
-    resizeImages(small);
-    resizeImages(medium);
-    resizeImages(zoom);
+    return resizeImages(small),
+            resizeImages(medium),
+            resizeImages(zoom);
 });
 
-gulp.task('images', ['resize'], function () {
+gulp.task('images', function () {
     del('img/new/**/*');
 });
 
