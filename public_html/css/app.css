@@ -204,8 +204,7 @@ h4 {
 }
 
 .img_link_img {
-    max-height: 100%;
-    max-width: 100%;/* Safari */
+    width: 100%;/* Safari */
     -webkit-transition-delay: 0.3s;
     transition-delay: 0.3s;
     transition: all .5s ease-in-out;
@@ -296,8 +295,13 @@ h4 {
 
 /*******************ANIMATION**/
 
-.popup-enter, .popup-leave {
+.popup-enter {
     opacity: 0;
+}
+
+.popup-leave { 
+    opacity: 0;
+    z-index: -999; /*firefox fix */
 }
 
 .popup-enter .popup_container,

@@ -237,7 +237,7 @@ var zoom = Vue.extend({
             if (this.currentPic.ratio === "portrait") {
                 return 'img_link_port';
             } else {
-                return '.img_link_land';
+                return '';
             }
         },
         popClass: function () {
@@ -298,7 +298,7 @@ router.map({
         subRoutes: {
             '/': {
                 component: {
-                    template: '',
+                    template: '<span></span>',
                     ready: function () {
                         $('body, html').css('overflow', 'auto');
                         $('body').removeClass('disable-scrolling');
@@ -316,7 +316,7 @@ router.map({
         subRoutes: {
             '/': {
                 component: {
-                    template: '',
+                    template: '<span></span>',
                     ready: function () {
                         $('body, html').css('overflow', 'auto');
                         $('body').removeClass('disable-scrolling');
@@ -328,9 +328,7 @@ router.map({
             }
         }
     }
-
-
-
+    
 });
 
 
