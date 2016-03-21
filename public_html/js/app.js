@@ -1,8 +1,35 @@
 /* global Vue */
 
+/*
+allPics - main Vue.js component. Called by Vue router to start the app.
 
-var url = "js/lazysizes.min.js";
+Due the fact that I am using Vue router, there is no root Vue instance, that is why all objects start with Vue.extend.
 
+- data - because it is so called vue component all data has to be a function where static data is returned.
+    - pics - variable which will store picture list, downloaded from gallery.json
+    - folders - this part contains links to the folders of different sizes of the presented pictures. 
+    From full resolution pictures to small (640 px width).
+    - sorted - used to track which version of gallery is displayed - sorted oldest to newest or newest to oldest.
+- computed - store all none static values, basically function which keep track of changes of the variables.
+    - length - return length of pictures array. Due the fact that gallery object is loaded asynchronously, when page 
+    is loaded it would go to error. When gallery is in the zoom mode, this way app track when to go to the beginning 
+    of the array.
+    - gallery - returns picture array.
+    - sortStatus - returns the text displayed to show how the gallery is sorted
+    - sortLink - returns the link for the sorting changing link.
+    - folderGallery - checks what is width of widow and checks if a device has a defined window orientation, 
+    if width is smaller than 800 and it had window orientation defined I assume that it must be mobile so pictures should be taken
+    from small folder.  
+    - zoomGallery - same check as above for zoomed gallery.
+- compiled - functions here are being called as soon as component is loaded.
+    - fetchData is being called to download JSON file with picture list
+- ready - functions here are being called as soon as component finished inserting all the data in DOM.
+    - downloadlazyload - is being called to download lazysizes script for asynchronous load of pictures. 
+- methods - functions which are being called by component or user.
+    - fetchData - jQuery JSON load method for picture array.
+    - sort - being called upon filter change, to animate the link change.
+    - downloadlazyload - jQuery Ajax request to download lazysizes script.
+*/
 var allPics = Vue.extend({
     data: function () {
         return {
@@ -13,9 +40,7 @@ var allPics = Vue.extend({
                 small: "img/gallery/small/",
                 zoom: "img/gallery/zoom/"
             },
-            sorted: false,
-            piczoom: false,
-            windowWidth: ''
+            sorted: false
         };
     },
     computed: {
@@ -44,14 +69,16 @@ var allPics = Vue.extend({
             }
         },
         folderGallery: function () {
-            if ($(window).width() < 740) {
+            var width = Math.max(document.documentElement.clientWidth, window.innerWidth);
+            if (width < 800 && (typeof window.orientation) !== 'undefined') {
                 return this.folders.small;
             } else {
                 return this.folders.mid;
             }
         },
         zoomGallery: function () {
-            if ($(window).width() < 740) {
+            var width = Math.max(document.documentElement.clientWidth, window.innerWidth);
+            if (width < 800 && (typeof window.orientation) !== 'undefined') {
                 return this.folders.mid;
             } else {
                 return this.folders.zoom;
@@ -81,6 +108,7 @@ var allPics = Vue.extend({
             }, 500);
         },
         downloadlazyload: function () {
+            var url = "js/lazysizes.min.js";
             $.ajax({
                 url: url,
                 dataType: 'script',
@@ -95,6 +123,10 @@ var allPics = Vue.extend({
 });
 
 
+/*
+sortedbynew - Vue.js component. Called by Vue router once the page address URL is "sortedbynew"
+ 
+ */
 
 var sortedbynew = Vue.extend({
     template: "#gallery_template",
