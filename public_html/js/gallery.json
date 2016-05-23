@@ -509,7 +509,7 @@
             "date": "02-2016",
             "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
-            "alt": "Foggy Vondelpar statue"
+            "alt": "Foggy Vondelpark statue"
         },
         {
             "name": "0075.jpg",
@@ -517,6 +517,34 @@
             "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
             "alt": "Amstel river on Sunday"
+        },
+        {
+            "name": "0076.jpg",
+            "date": "04-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Horses in Amsterdamse Bos"
+        },
+        {
+            "name": "0077.jpg",
+            "date": "05-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Amsterdamse Bos Sunday"
+        },
+        {
+            "name": "0078.jpg",
+            "date": "02-2016",
+            "location": "Amsterdamse Waterleidingduinen, the Netherlands",
+            "ratio": "landscape",
+            "alt": "The Tree"
+        },
+        {
+            "name": "0079.jpg",
+            "date": "02-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Chilled lake"
         }
     ]
 }

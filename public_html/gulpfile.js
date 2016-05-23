@@ -1,6 +1,7 @@
-/* global UNKNOWN */
 
-"use strict";
+/*eslint-env node*/
+
+
 var gulp = require('gulp'),
         concat = require('gulp-concat'),
         uglify = require('gulp-uglify'),
@@ -32,13 +33,13 @@ var resizeImages = function (options) {
             }))
             .pipe(rename(function (path) {
                 path.dirname += options.folder;
-                path.extname = ".jpg";
+                path.extname = '.jpg';
                 return path;
             }))
             .pipe(gulp.dest('img/gallery'));
 };
 
-gulp.task("jpg", function () {
+gulp.task('images1', function () {
 
     var files = fs.readdirSync('img/gallery/full_size/'), index = 1, prename = '';
 
@@ -68,15 +69,15 @@ gulp.task("jpg", function () {
             .pipe(chmod(666))
             .pipe(rename(function (path) {
                 path.basename = name();
-                path.dirname += "/full_size";
-                path.extname = ".jpg";
+                path.dirname += '/full_size';
+                path.extname = '.jpg';
                 return path;
             }))
             .pipe(gulp.dest('img/gallery'));
 });
 
 
-gulp.task('resize', function () {
+gulp.task('images2', function () {
 
 
     var small = {
@@ -97,18 +98,18 @@ gulp.task('resize', function () {
             resizeImages(zoom);
 });
 
-gulp.task('images', function () {
+gulp.task('images3', function () {
     del('img/new/**/*');
 });
 
 
-gulp.task("json", function () {
+gulp.task('json', function () {
     gulp.src('img/gallery/**')
             .pipe(require('gulp-filelist')('filelist.json'))
             .pipe(gulp.dest('img'));
 });
 
-gulp.task("concatScripts", function () {
+gulp.task('concatScripts', function () {
     return gulp.src([
         'js/jquery-2.2.0.min.js',
         'js/hammer.min.js',
@@ -121,13 +122,13 @@ gulp.task("concatScripts", function () {
             .pipe(maps.write('./'))
             .pipe(gulp.dest('js'));
 });
-gulp.task("minifyScripts", ["concatScripts"], function () {
-    return gulp.src("js/app.concat.js")
+gulp.task('minifyScripts', ['concatScripts'], function () {
+    return gulp.src('js/app.concat.js')
             .pipe(uglify())
             .pipe(rename('app.min.js'))
             .pipe(gulp.dest('js'));
 });
-gulp.task("concatCSS", function () {
+gulp.task('concatCSS', function () {
     return gulp.src([
         'css/normalize.css',
         'css/app.css'
@@ -137,16 +138,16 @@ gulp.task("concatCSS", function () {
             .pipe(maps.write('./'))
             .pipe(gulp.dest('css'));
 });
-gulp.task("minifyCSS", ["concatCSS"], function () {
-    return gulp.src("css/app.concat.css")
+gulp.task('minifyCSS', ['concatCSS'], function () {
+    return gulp.src('css/app.concat.css')
             .pipe(cssnano({compatibility: 'ie9'}))
             .pipe(rename('app.min.css'))
             .pipe(gulp.dest('css'));
 });
-gulp.task("build", ['minifyScripts', 'minifyCSS'], function () {
-    return gulp.src(["css/app.min.css", "js/app.min.js", "js/gallery.json",
-        "js/lazysizes.min.js", "img/gallery/**", "img/**.{svg,gif,png,jpg}",
-        "fonts/**", "favicon.ico"], {base: './'})
+gulp.task('build', ['minifyScripts', 'minifyCSS'], function () {
+    return gulp.src(['css/app.min.css', 'js/app.min.js', 'js/gallery.json',
+        'js/lazysizes.min.js', 'img/gallery/**', 'img/**.{svg,gif,png,jpg}',
+        'fonts/**', 'favicon.ico'], {base: './'})
             .pipe(gulp.dest('dist'));
 });
 gulp.task('replace', function () {
@@ -160,7 +161,7 @@ gulp.task('replace', function () {
 gulp.task('clean', ['replace'], function () {
     del(['css/app.*.css*', 'js/app.*.js*']);
 });
-gulp.task("default", ['build'], function () {
+gulp.task('default', ['build'], function () {
     gulp.start('clean');
 });
 gulp.task('postcss', function () {

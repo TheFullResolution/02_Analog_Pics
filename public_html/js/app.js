@@ -1,4 +1,4 @@
-/* global Vue */
+/* global Vue $*/
 
 /*
 allPics - main Vue.js component. Called by Vue router to start the app.
@@ -31,44 +31,44 @@ Due the fact that I am using Vue router, there is no root Vue instance, that is 
     - downloadlazyload - jQuery Ajax request to download lazysizes script.
 */
 var allPics = Vue.extend({
-    data: function () {
+    data: function() {
         return {
             pics: {},
             folders: {
-                full: "img/gallery/full_size/",
-                mid: "img/gallery/mid/",
-                small: "img/gallery/small/",
-                zoom: "img/gallery/zoom/"
+                full: 'img/gallery/full_size/',
+                mid: 'img/gallery/mid/',
+                small: 'img/gallery/small/',
+                zoom: 'img/gallery/zoom/'
             },
             sorted: false
         };
     },
     computed: {
-        length: function () {
+        length: function() {
             if (this.pics.gallery) {
                 return this.pics.gallery.length;
             } else {
                 return 0;
             }
         },
-        gallery: function () {
+        gallery: function() {
             return this.pics.gallery;
         },
-        sortStatus: function () {
+        sortStatus: function() {
             if (this.sorted) {
-                return "Sorted oldest to newest";
+                return 'Sorted oldest to newest';
             } else {
-                return "Sorted newest to oldest";
+                return 'Sorted newest to oldest';
             }
         },
-        sortLink: function () {
+        sortLink: function() {
             if (this.sorted) {
-                return "/sortedbynew";
+                return '/sortedbynew';
             } else {
-                return "/sortedbyold";
+                return '/sortedbyold';
             }
         },
-        folderGallery: function () {
+        folderGallery: function() {
             var width = Math.max(document.documentElement.clientWidth, window.innerWidth);
             if (width < 800 && (typeof window.orientation) !== 'undefined') {
                 return this.folders.small;
@@ -76,7 +76,7 @@ var allPics = Vue.extend({
                 return this.folders.mid;
             }
         },
-        zoomGallery: function () {
+        zoomGallery: function() {
             var width = Math.max(document.documentElement.clientWidth, window.innerWidth);
             if (width < 800 && (typeof window.orientation) !== 'undefined') {
                 return this.folders.mid;
@@ -85,61 +85,46 @@ var allPics = Vue.extend({
             }
         }
     },
-    compiled: function () {
+    compiled: function() {
         this.fetchData();
     },
-    ready: function () {
-        this.downloadlazyload();
-    },
     methods: {
-        fetchData: function () {
+        fetchData: function() {
             var self = this;
-            $.getJSON("js/gallery.json", function (json) {
+            $.getJSON('js/gallery.json', function(json) {
                 self.pics = json;
             });
         },
-        sort: function () {
+        sort: function() {
             $('#sort_arrows').addClass('moved');
             $('#sort_text').addClass('text_showed');
 
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#sort_text').removeClass('text_showed');
                 $('#sort_arrows').removeClass('moved');
             }, 500);
-        },
-        downloadlazyload: function () {
-            var url = "js/lazysizes.min.js";
-            $.ajax({
-                url: url,
-                dataType: 'script',
-                success: function () {
-                    window.lazySizesConfig = {
-                        addClasses: true
-                    };
-
-                }});
         }
     }
 });
 
 
 /*
-sortedbynew - Vue.js component. Called by Vue router once the page address URL is "sortedbynew"
+sortedbynew - Vue.js component. Called by Vue router once the page address URL is 'sortedbynew'
  
  */
 
 var sortedbynew = Vue.extend({
-    template: "#gallery_template",
-    ready: function () {
+    template: '#gallery_template',
+    ready: function() {
         this.$parent.sorted = false;
     },
-    data: function () {
+    data: function() {
         return {
-            zoomLink: "/sortedbynew"
+            zoomLink: '/sortedbynew'
         };
     },
     computed: {
-        gallery: function () {
+        gallery: function() {
             if (this.$parent.gallery) {
                 var pics = this.$parent.gallery.slice();
                 pics.reverse();
@@ -148,16 +133,16 @@ var sortedbynew = Vue.extend({
                 return '';
             }
         },
-        folders: function () {
+        folders: function() {
             return this.$parent.folderGallery;
         },
-        zoomGallery: function () {
+        zoomGallery: function() {
             return this.$parent.zoomGallery;
         },
-        folderFull: function () {
+        folderFull: function() {
             return this.$parent.folders.full;
         },
-        length: function () {
+        length: function() {
             return this.$parent.length;
         }
 
@@ -165,17 +150,17 @@ var sortedbynew = Vue.extend({
 });
 
 var sortedbyold = Vue.extend({
-    template: "#gallery_template",
-    ready: function () {
+    template: '#gallery_template',
+    ready: function() {
         this.$parent.sorted = true;
     },
-    data: function () {
+    data: function() {
         return {
-            zoomLink: "/sortedbyold"
+            zoomLink: '/sortedbyold'
         };
     },
     computed: {
-        gallery: function () {
+        gallery: function() {
             if (this.$parent.gallery) {
                 var pics_notsorted = this.$parent.gallery;
                 return pics_notsorted;
@@ -183,43 +168,44 @@ var sortedbyold = Vue.extend({
                 return '';
             }
         },
-        folders: function () {
+        folders: function() {
             return this.$parent.folderGallery;
         },
-        folderFull: function () {
+        folderFull: function() {
             return this.$parent.folders.full;
         },
-        zoomGallery: function () {
+        zoomGallery: function() {
             return this.$parent.zoomGallery;
         },
-        length: function () {
+        length: function() {
             return this.$parent.length;
         }
     }
 });
 
 var zoom = Vue.extend({
-    template: "#popup",
-    ready: function () {
+    template: '#popup',
+    ready: function() {
         $('body, html').css('overflow', 'hidden');
         $('body').addClass('disable-scrolling');
         this.swipe();
-        this.$watch(function () {
-            return this.index;
-        },
-                function () {
-                    this.imgChange();
-                });
+        this.imgChangeStart();
+        this.$watch(function() {
+                return this.index;
+            },
+            function() {
+                this.imgChange();
+            });
     },
     computed: {
-        index: function () {
+        index: function() {
             if (this.$route.params.picId) {
                 return parseInt(this.$route.params.picId) - 1;
             } else {
                 return 0;
             }
         },
-        currentPic: function () {
+        currentPic: function() {
             var self = this;
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
@@ -228,7 +214,7 @@ var zoom = Vue.extend({
                 return '';
             }
         },
-        fullSizeSrc: function () {
+        fullSizeSrc: function() {
             var self = this;
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
@@ -237,7 +223,7 @@ var zoom = Vue.extend({
                 return '';
             }
         },
-        currentPicSrc: function () {
+        currentPicSrc: function() {
             var self = this;
             if (self.$parent.gallery) {
                 var pic = self.$parent.gallery[self.index];
@@ -246,10 +232,10 @@ var zoom = Vue.extend({
                 return 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             }
         },
-        link: function () {
+        link: function() {
             return this.$parent.zoomLink;
         },
-        nextpic: function () {
+        nextpic: function() {
             var check = this.$parent.length;
             if ((this.index + 1) === check) {
                 return 1;
@@ -257,7 +243,7 @@ var zoom = Vue.extend({
                 return this.index + 2;
             }
         },
-        prevpic: function () {
+        prevpic: function() {
             var check = this.$parent.length;
             if (this.index === 0) {
                 return check;
@@ -265,15 +251,15 @@ var zoom = Vue.extend({
                 return this.index;
             }
         },
-        imgClass: function () {
-            if (this.currentPic.ratio === "portrait") {
+        imgClass: function() {
+            if (this.currentPic.ratio === 'portrait') {
                 return 'img_link_port';
             } else {
                 return '';
             }
         },
-        popClass: function () {
-            if (this.currentPic.ratio === "portrait") {
+        popClass: function() {
+            if (this.currentPic.ratio === 'portrait') {
                 return 'popup_container_h';
             } else {
                 return '';
@@ -281,29 +267,32 @@ var zoom = Vue.extend({
         }
     },
     methods: {
-        imgChange: function () {
-            $(".img_link_img").attr("src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+        imgChange: function() {
+            $('.img_link_img').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
             $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
         },
-        details: function () {
-            $('.popup_details').slideToggle("fast");
-            $('.popup_details_top').slideToggle("fast");
+        imgChangeStart: function() {
+            $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
+        },
+        details: function() {
+            $('.popup_details').slideToggle('fast');
+            $('.popup_details_top').slideToggle('fast');
 
         },
-        swipe: function () {
+        swipe: function() {
             var self = this;
             var options = {
                 preventDefault: true
             };
             var myElement = document.getElementById('swipe_div');
             var mc = new Hammer(myElement, options);
-            mc.on('swipeleft', function () {
-                var path = {path: self.link + '/' + self.nextpic};
+            mc.on('swipeleft', function() {
+                var path = { path: self.link + '/' + self.nextpic };
                 router.go(path);
                 self.imgChange();
             });
-            mc.on('swiperight', function () {
-                var path = {path: self.link + '/' + self.prevpic};
+            mc.on('swiperight', function() {
+                var path = { path: self.link + '/' + self.prevpic };
                 router.go(path);
                 self.imgChange();
             });
@@ -316,8 +305,7 @@ var zoom = Vue.extend({
 
 
 
-var router = new VueRouter({
-});
+var router = new VueRouter({});
 
 
 router.redirect({
@@ -331,7 +319,7 @@ router.map({
             '/': {
                 component: {
                     template: '<span></span>',
-                    ready: function () {
+                    ready: function() {
                         $('body, html').css('overflow', 'auto');
                         $('body').removeClass('disable-scrolling');
                     }
@@ -349,7 +337,7 @@ router.map({
             '/': {
                 component: {
                     template: '<span></span>',
-                    ready: function () {
+                    ready: function() {
                         $('body, html').css('overflow', 'auto');
                         $('body').removeClass('disable-scrolling');
                     }
@@ -360,16 +348,17 @@ router.map({
             }
         }
     }
-    
-});
-
-
-router.start(allPics, 'body', function () {
 
 });
 
-document.ontouchmove = function (event) {
-    var isTouchMoveAllowed = true, target = event.target;
+
+router.start(allPics, 'body', function() {
+
+});
+
+document.ontouchmove = function(event) {
+    var isTouchMoveAllowed = true,
+        target = event.target;
     while (target !== null) {
         if (target.classList && target.classList.contains('disable-scrolling')) {
             isTouchMoveAllowed = false;
