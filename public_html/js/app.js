@@ -1,4 +1,4 @@
-/* global Vue $*/
+/* global Vue Hammer $ VueRouter*/
 
 /*
 allPics - main Vue.js component. Called by Vue router to start the app.
@@ -7,24 +7,24 @@ Due the fact that I am using Vue router, there is no root Vue instance, that is 
 
 - data - because it is so called vue component all data has to be a function where static data is returned.
     - pics - variable which will store picture list, downloaded from gallery.json
-    - folders - this part contains links to the folders of different sizes of the presented pictures. 
+    - folders - this part contains links to the folders of different sizes of the presented pictures.
     From full resolution pictures to small (640 px width).
     - sorted - used to track which version of gallery is displayed - sorted oldest to newest or newest to oldest.
 - computed - store all none static values, basically function which keep track of changes of the variables.
-    - length - return length of pictures array. Due the fact that gallery object is loaded asynchronously, when page 
-    is loaded it would go to error. When gallery is in the zoom mode, this way app track when to go to the beginning 
+    - length - return length of pictures array. Due the fact that gallery object is loaded asynchronously, when page
+    is loaded it would go to error. When gallery is in the zoom mode, this way app track when to go to the beginning
     of the array.
     - gallery - returns picture array.
     - sortStatus - returns the text displayed to show how the gallery is sorted
     - sortLink - returns the link for the sorting changing link.
-    - folderGallery - checks what is width of widow and checks if a device has a defined window orientation, 
+    - folderGallery - checks what is width of widow and checks if a device has a defined window orientation,
     if width is smaller than 800 and it had window orientation defined I assume that it must be mobile so pictures should be taken
-    from small folder.  
+    from small folder.
     - zoomGallery - same check as above for zoomed gallery.
 - compiled - functions here are being called as soon as component is loaded.
     - fetchData is being called to download JSON file with picture list
 - ready - functions here are being called as soon as component finished inserting all the data in DOM.
-    - downloadlazyload - is being called to download lazysizes script for asynchronous load of pictures. 
+    - downloadlazyload - is being called to download lazysizes script for asynchronous load of pictures.
 - methods - functions which are being called by component or user.
     - fetchData - jQuery JSON load method for picture array.
     - sort - being called upon filter change, to animate the link change.
@@ -110,7 +110,7 @@ var allPics = Vue.extend({
 
 /*
 sortedbynew - Vue.js component. Called by Vue router once the page address URL is 'sortedbynew'
- 
+
  */
 
 var sortedbynew = Vue.extend({
@@ -186,16 +186,17 @@ var sortedbyold = Vue.extend({
 var zoom = Vue.extend({
     template: '#popup',
     ready: function() {
-        $('body, html').css('overflow', 'hidden');
+        $('body').css('overflow-y', 'hidden');
         $('body').addClass('disable-scrolling');
         this.swipe();
-        this.imgChangeStart();
+
         this.$watch(function() {
-                return this.index;
+                return this.currentPicSrc;
             },
             function() {
                 this.imgChange();
             });
+
     },
     computed: {
         index: function() {
@@ -271,9 +272,6 @@ var zoom = Vue.extend({
             $('.img_link_img').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
             $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
         },
-        imgChangeStart: function() {
-            $('.img_link_img').removeClass('lazyloaded').addClass('lazyload');
-        },
         details: function() {
             $('.popup_details').slideToggle('fast');
             $('.popup_details_top').slideToggle('fast');
@@ -287,12 +285,16 @@ var zoom = Vue.extend({
             var myElement = document.getElementById('swipe_div');
             var mc = new Hammer(myElement, options);
             mc.on('swipeleft', function() {
-                var path = { path: self.link + '/' + self.nextpic };
+                var path = {
+                    path: self.link + '/' + self.nextpic
+                };
                 router.go(path);
                 self.imgChange();
             });
             mc.on('swiperight', function() {
-                var path = { path: self.link + '/' + self.prevpic };
+                var path = {
+                    path: self.link + '/' + self.prevpic
+                };
                 router.go(path);
                 self.imgChange();
             });

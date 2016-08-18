@@ -24,11 +24,15 @@ var gulp = require('gulp'),
 var resizeImages = function(options) {
     return gulp.src('img/gallery/full_size/*.{jpg,JPG}')
         .pipe(changed('img/gallery/' + options.folder))
-        .pipe(imageResize({ width: options.width }))
+        .pipe(imageResize({
+            width: options.width
+        }))
         .pipe(imagemin({
             progressive: true,
             interlaced: true,
-            svgoPlugins: [{ removeViewBox: false }],
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
             use: [pngquant()]
         }))
         .pipe(rename(function(path) {
@@ -142,7 +146,9 @@ gulp.task('concatCSS', function() {
 });
 gulp.task('minifyCSS', ['concatCSS'], function() {
     return gulp.src('css/app.concat.css')
-        .pipe(cssnano({ compatibility: 'ie9' }))
+        .pipe(cssnano({
+            compatibility: 'ie9'
+        }))
         .pipe(rename('app.min.css'))
         .pipe(gulp.dest('css'));
 });
@@ -150,7 +156,9 @@ gulp.task('build', ['minifyScripts', 'minifyCSS'], function() {
     return gulp.src(['css/app.min.css', 'js/app.min.js', 'js/gallery.json',
             'js/lazysizes.min.js', 'img/gallery/**', 'img/**.{svg,gif,png,jpg}',
             'fonts/**', 'favicon.ico'
-        ], { base: './' })
+        ], {
+            base: './'
+        })
         .pipe(gulp.dest('dist'));
 });
 gulp.task('replace', function() {
@@ -169,7 +177,9 @@ gulp.task('default', ['build'], function() {
 });
 gulp.task('postcss', function() {
     var processors = [
-        autoprefixer({ browsers: ['last 2 versions', '> 5%'] }),
+        autoprefixer({
+            browsers: ['last 2 versions', '> 5%']
+        }),
         mqpacker,
         cssnext()
     ];
@@ -178,11 +188,11 @@ gulp.task('postcss', function() {
         .pipe(rename('app.post.css'))
         .pipe(gulp.dest('css/'));
 });
-//Serve development verison 
+//Serve development verison
 gulp.task('serve', function() {
     browserSync.init({
         server: './'
-        // browser: 'Chrome'
+            // browser: 'Chrome'
 
     });
     gulp.watch('js/*.js').on('change', browserSync.reload);

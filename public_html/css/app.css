@@ -203,8 +203,7 @@ h4 {
 }
 
 .img_link_img {
-    width: 100%;
-    max-height: 100%;
+    height: auto;
     max-width: 100%;/* Safari */
     -webkit-transition-delay: 0.3s;
     transition-delay: 0.3s;
@@ -215,7 +214,7 @@ h4 {
 
 .img_link_port {
     width: auto;
-    max-height: 100vmin;
+    height: 100vmin;
 }
 
 .arrows {
@@ -300,7 +299,7 @@ h4 {
     opacity: 0;
 }
 
-.popup-leave { 
+.popup-leave {
     opacity: 0;
     z-index: -999; /*firefox fix */
 }
