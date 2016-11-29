@@ -147,7 +147,7 @@ gulp.task('minifyCSS', ['concatCSS'], function() {
 });
 gulp.task('build', ['minifyScripts', 'minifyCSS'], function() {
     return gulp.src(['app/css/app.min.css', 'app/js/app.min.js', 'app/js/gallery.json',
-            'app/js/lazysizes.min.js', 'app/img/gallery/**', 'app/img/**.{svg,gif,png,jpg}',
+            'app/js/libraries/lazysizes.min.js', 'app/img/gallery/**', 'app/img/**.{svg,gif,png,jpg}',
             'app/fonts/**', 'app/favicon.ico'
         ], {
             base: 'app'
