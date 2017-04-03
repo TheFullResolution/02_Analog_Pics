@@ -1,6 +1,5 @@
 {
-    "gallery": [
-        {
+    "gallery": [{
             "name": "0001.jpg",
             "date": "08-2015",
             "location": "Amsterdam",
@@ -328,13 +327,6 @@
             "location": "Amsterdam, the Netherlands",
             "ratio": "landscape",
             "alt": "View over IJ river"
-        },
-        {
-            "name": "0048.jpg",
-            "date": "12-2015",
-            "location": "Gdynia, Poland",
-            "ratio": "landscape",
-            "alt": "Beach near the port"
         },
         {
             "name": "0049.jpg",
@@ -692,6 +684,185 @@
             "location": "Lage Vuursche, the Netherlands",
             "ratio": "landscape",
             "alt": "Forest path 2"
+        },
+        {
+            "name": "0102.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Pine Tree"
+        },
+        {
+            "name": "0103.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Tree graveyard"
+        },
+        {
+            "name": "0104.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Morning frost"
+        },
+        {
+            "name": "0105.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Forest road"
+        },
+        {
+            "name": "0106.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Local horse"
+        },
+        {
+            "name": "0107.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Melted frost"
+        },
+        {
+            "name": "0108.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Fields"
+        },
+        {
+            "name": "0109.jpg",
+            "date": "12-2016",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "More fields"
+        },
+        {
+            "name": "0110.jpg",
+            "date": "12-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "RAI at night"
+        },
+        {
+            "name": "0111.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Old warship"
+        },
+        {
+            "name": "0112.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Harbour"
+        },
+        {
+            "name": "0113.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Wave conductor"
+        },
+        {
+            "name": "0114.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Beach road"
+        },
+        {
+            "name": "0115.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Beginning of the boulevard"
+        },
+        {
+            "name": "0116.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Boulevard"
+        },
+        {
+            "name": "0117.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Old Bakery"
+        },
+        {
+            "name": "0118.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Morning on the beach"
+        },
+        {
+            "name": "0119.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Morning on the beach2"
+        },
+        {
+            "name": "0120.jpg",
+            "date": "12-2016",
+            "location": "Gdynia, Poland",
+            "ratio": "landscape",
+            "alt": "Morning on the beach with dog"
+        },
+        {
+            "name": "0121.jpg",
+            "date": "12-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Amsterdamse Bos the barrow"
+        },
+        {
+            "name": "0122.jpg",
+            "date": "12-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Amsterdamse Bos ducks"
+        },
+        {
+            "name": "0123.jpg",
+            "date": "01-2017",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "Frozen tree"
+        }, {
+            "name": "0124.jpg",
+            "date": "01-2017",
+            "location": "Oud-Turnhout, Belgium",
+            "ratio": "landscape",
+            "alt": "a path in the park"
+        }, {
+            "name": "0125.jpg",
+            "date": "09-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Park Frankendael's frozen Knotted Willows"
+        }, {
+            "name": "0126.jpg",
+            "date": "09-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Park Frankendael's frozen gardens"
+        },
+        {
+            "name": "0127.jpg",
+            "date": "09-2016",
+            "location": "Amsterdam, the Netherlands",
+            "ratio": "landscape",
+            "alt": "Amstelsluizen winter"
         }
     ]
 }
