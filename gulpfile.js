@@ -145,7 +145,7 @@ gulp.task('minifyCSS', ['concatCSS'], function() {
         .pipe(rename('app.min.css'))
         .pipe(gulp.dest('app/css'));
 });
-gulp.task('build', ['minifyScripts', 'minifyCSS'], function() {
+gulp.task('movefiles', ['minifyScripts', 'minifyCSS'], function() {
     return gulp.src(['app/css/app.min.css', 'app/js/app.min.js', 'app/js/gallery.json',
             'app/js/libraries/lazysizes.min.js', 'app/img/gallery/**', 'app/img/**.{svg,gif,png,jpg}',
             'app/fonts/**', 'app/favicon.ico'
@@ -165,7 +165,7 @@ gulp.task('replace', function() {
 gulp.task('clean', ['replace'], function() {
     del(['app/css/app.*.css*', 'app/js/app.*.js*']);
 });
-gulp.task('default', ['build'], function() {
+gulp.task('build', ['movefiles'], function() {
     gulp.start('clean');
 });
 gulp.task('postcss', function() {
@@ -196,7 +196,8 @@ gulp.task('serve', function() {
 
 gulp.task('serveBuild', function() {
     browserSync.init({
-        server: 'dist/'
+        server: 'dist/',
+        port: 4000,
             // browser: 'Chrome'
 
     });
