@@ -40,6 +40,7 @@ var resizeImages = function(options) {
             path.extname = '.jpg';
             return path;
         }))
+        .pipe(chmod(777))
         .pipe(gulp.dest('app/img/gallery'));
 };
 
@@ -72,7 +73,7 @@ gulp.task('images1', function() {
     };
 
     return gulp.src('NewImages/**.{jpg,JPG}')
-        .pipe(chmod(666))
+        .pipe(chmod(777))
         .pipe(rename(function(path) {
             path.basename = name();
             path.dirname += '/full_size';
